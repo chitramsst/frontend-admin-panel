@@ -73,8 +73,9 @@
           >
             <a
               href="#"
-              class="flex items-center rounded px-3 py-2 hover:text-black hover:bg-gray-50 transition-all"
+              class="flex items-center rounded-t-xl px-3 py-2 hover:text-black  transition-all"
               @click="open = !open"
+              :class="open ? 'bg-gray-200' : ''"
             >
               <i data-feather="sliders" style="width: 1.2em" class="mr-3"></i>
 
@@ -86,11 +87,11 @@
                 <i data-feather="chevron-down" style="width: 1.2em"></i>
               </p>
             </a>
-            <ul class="w-full pl-3" x-show="open">
+            <ul class="w-full pl-3 bg-purple-200 rounded-b-xl" x-show="open">
               <li class="w-full">
                 <a
                   href="#"
-                  class="flex items-center rounded px-3 py-2 hover:text-black hover:bg-gray-50 transition-all"
+                  class="flex items-center rounded px-3 py-2 hover:text-black  transition-all"
                 >
                   <i data-feather="code" style="width: 1em" class="mr-3"></i>
 
@@ -100,7 +101,7 @@
               <li class="w-full">
                 <a
                   href="#"
-                  class="flex items-center rounded px-3 py-2 hover:text-black hover:bg-gray-50 transition-all"
+                  class="flex items-center rounded px-3 py-2 hover:text-black  transition-all"
                 >
                   <i data-feather="code" style="width: 1em" class="mr-3"></i>
 
@@ -110,7 +111,7 @@
               <li class="w-full">
                 <a
                   href="#"
-                  class="flex items-center rounded px-3 py-2 hover:text-black hover:bg-gray-50 transition-all"
+                  class="flex items-center rounded px-3 py-2 hover:text-black transition-all"
                 >
                   <i data-feather="code" style="width: 1em" class="mr-3"></i>
 
@@ -134,11 +135,12 @@
             x-data="{ open: false, label: 'Reports' , searchQuery: ''}"
             @click.away="open = false"
           >
-            <a
-              href="#"
-              class="flex items-center rounded px-3 py-2 hover:text-black hover:bg-gray-50 transition-all"
-              @click="open = !open"
-            >
+          <a
+          href="#"
+          class="flex items-center rounded-t-xl px-3 py-2 hover:text-black  transition-all"
+          @click="open = !open"
+          :class="open ? 'bg-gray-200' : ''"
+        >
               <i data-feather="briefcase" style="width: 1.2em" class="mr-3"></i>
 
               <span class="flex-grow">Expense</span>
@@ -149,11 +151,11 @@
                 <i data-feather="chevron-down" style="width: 1.2em"></i>
               </p>
             </a>
-            <ul class="w-full pl-3" x-show="open">
+            <ul class="w-full pl-3 bg-purple-200 rounded-b-xl" x-show="open">
               <li class="w-full">
                 <a
                   href="#"
-                  class="flex items-center rounded px-3 py-2 hover:text-black hover:bg-gray-50 transition-all"
+                  class="flex items-center rounded px-3 py-2 hover:text-black  transition-all"
                 >
                   <i data-feather="code" style="width: 1em" class="mr-3"></i>
 
@@ -163,7 +165,7 @@
               <li class="w-full">
                 <a
                   href="#"
-                  class="flex items-center rounded px-3 py-2 hover:text-black hover:bg-gray-50 transition-all"
+                  class="flex items-center rounded px-3 py-2 hover:text-black  transition-all"
                 >
                   <i data-feather="code" style="width: 1em" class="mr-3"></i>
 
@@ -192,11 +194,12 @@
             x-data="{ open: false, label: 'Reports' , searchQuery: ''}"
             @click.away="open = false"
           >
-            <a
-              href="#"
-              class="flex items-center rounded px-3 py-2 hover:text-black hover:bg-gray-50 transition-all"
-              @click="open = !open"
-            >
+          <a
+          href="#"
+          class="flex items-center rounded-t-xl px-3 py-2 hover:text-black  transition-all"
+          @click="open = !open"
+          :class="open ? 'bg-gray-200' : ''"
+        >
               <i data-feather="key" style="width: 1.2em" class="mr-3"></i>
 
               <span class="flex-grow">Settings</span>
@@ -207,11 +210,11 @@
                 <i data-feather="chevron-down" style="width: 1.2em"></i>
               </p>
             </a>
-            <ul class="w-full pl-3" x-show="open" x-collapse>
+            <ul class="w-full pl-3 bg-purple-200 rounded-b-xl" x-show="open" x-collapse>
               <li class="w-full">
                 <a
                   href="#"
-                  class="flex items-center rounded px-3 py-2 hover:text-black hover:bg-gray-50 transition-all"
+                  class="flex items-center rounded px-3 py-2 hover:text-black  transition-all"
                 >
                   <i data-feather="code" style="width: 1em" class="mr-3"></i>
 
@@ -221,7 +224,7 @@
               <li class="w-full">
                 <a
                   href="#"
-                  class="flex items-center rounded px-3 py-2 hover:text-black hover:bg-gray-50 transition-all"
+                  class="flex items-center rounded px-3 py-2 hover:text-black  transition-all"
                 >
                   <i data-feather="code" style="width: 1em" class="mr-3"></i>
 
@@ -235,7 +238,7 @@
           <li class="w-full">
             <a
               href="#"
-              class="flex items-center rounded px-3 py-2 text-purple-600 hover:text-black hover:bg-gray-50 transition-all"
+              class="flex items-center rounded px-3 py-2 text-purple-600 hover:text-black  transition-all"
             >
               <i data-feather="log-out" style="width: 1.2em" class="mr-3"></i>
               <span class="flex-grow">Logout</span>
