@@ -16,6 +16,7 @@
 
   <body class="bg-gray-100 h-screen w-full" x-data="{'menu':true}">
     <div class="flex h-full">
+      <!-- sidebar -->
       <aside
         class="bg-white fixed shadow-xl border-r-2 pt-10 w-64 h-full p-6 transition-transform duration-300 ease-in-out transform top-0 left-0"
         x-show="menu"
@@ -68,6 +69,7 @@
           <li
             class="w-full"
             x-data="{ open: false, label: 'Reports' , searchQuery: ''}"
+            @click.away="open = false"
           >
             <a
               href="#"
@@ -130,6 +132,7 @@
           <li
             class="w-full"
             x-data="{ open: false, label: 'Reports' , searchQuery: ''}"
+            @click.away="open = false"
           >
             <a
               href="#"
@@ -187,6 +190,7 @@
           <li
             class="w-full"
             x-data="{ open: false, label: 'Reports' , searchQuery: ''}"
+            @click.away="open = false"
           >
             <a
               href="#"
@@ -245,11 +249,14 @@
           class="w-full h-20 bg-white border-b-2 shadow-2xs text-gray-500 z-10 flex items-center p-6 justify-between"
         >
           <div @click="{menu=!menu}">
+            <div class="flex">
             <i
               data-feather="align-justify"
               style="width: 1.2em"
               class="mr-3"
             ></i>
+            <p class="px-5 text-xl font-bold text-purple-600"> Dashboard </p>
+          </div>
           </div>
           <div
             x-data="{ dropopen: false }"
@@ -682,18 +689,21 @@
               class="absolute right-0 w-36 bg-white shadow-md rounded-lg overflow-hidden z-30"
               @click.outside="dropopen = false"
             >
+            <a
+            href="#"
+            class="flex items-center rounded px-3 py-2 text-gray-600 hover:text-black hover:bg-gray-50 transition-all"
+          >
+            <i data-feather="user" style="width: 1.2em" class="mr-3"></i>
+            <span class="flex-grow">Profile</span>
+          </a>
+          <p class="border-t border-gray-200 my-2 h-px w-full"></p>
               <a
-                href="/profile"
-                class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition"
-              >
-                Profile
-              </a>
-              <a
-                href="/logout"
-                class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition"
-              >
-                Logout
-              </a>
+              href="#"
+              class="flex items-center rounded px-3 py-2 text-purple-600 hover:text-black hover:bg-gray-50 transition-all"
+            >
+              <i data-feather="log-out" style="width: 1.2em" class="mr-3"></i>
+              <span class="flex-grow">Logout</span>
+            </a>
             </div>
           </div>
         </div>
