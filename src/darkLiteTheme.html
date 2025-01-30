@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" x-data="{ 
+    dark: localStorage.getItem('dark') === 'true' || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
+}" 
+x-init="$watch('dark', value => localStorage.setItem('dark', value))" 
+:class="{ 'dark': dark }"> <!-- Ensure the dark class is applied here -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <link href="./css/output.css" rel="stylesheet">
+</head>
+<body class="transition-colors duration-300 bg-gray-200 dark:bg-black">
+  <!-- Header -->
+  <header class="flex items-center justify-between p-4 shadow-md transition-colors duration-300"
+    :class="dark ? 'bg-gray-800' : 'bg-gray-200'">
+    <h1 class="text-lg font-bold">Admin Panel</h1>
+    <!-- Theme Toggle Button -->
+    <button 
+      @click="dark = !dark; console.log('Dark Mode:', dark)" 
+      class="p-2 bg-gray-200 dark:bg-gray-700 rounded-full focus:outline-none transition"
+    >
+      <span x-show="!dark" x-transition>🌙</span>
+      <span x-show="dark" x-transition>☀️</span>
+    </button>
+  </header>
+
+  <!-- Content -->
+  <main class="flex-1 p-4">
+    <h2 class="text-2xl font-semibold mb-4">Welcome to the Admin Panel</h2>
+    <p class="mb-4">This is a responsive admin panel with a light/dark theme toggle.</p>
+  </main>
+</body>
+</html>

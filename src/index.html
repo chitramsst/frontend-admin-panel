@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
+
+  </head>
+  <body class="bg-gray-100 font-sans antialiased">
+    <div class="h-screen flex">
+      <!-- Sidebar -->
+      <div
+      x-data="{ open: false, searchQuery: '' }"
+        id="sidebar"
+        class="w-64 bg-gray-800 text-white p-5 transform translate-x-0 -translate-x-full md:translate-x-0 md:fixed md:h-full transition-transform duration-300 ease-in-out fixed h-full z-50 hidden md:block"
+      >
+        <h2 class="text-2xl font-bold mb-6">Admin Panel</h2>
+        <div class="mb-4">
+            <input
+            x-model="searchQuery"
+            id="searchInput"
+              type="text"
+              class="w-full py-2 px-3 rounded bg-gray-700 text-white"
+              placeholder="Search..."
+              autocomplete="off"
+            />
+          </div>
+        <p id="noResults" class="text-gray-300 hidden">No results found</p>
+
+        <ul>
+            <li class="menu-item"  x-data="{ open: false, label: 'Dashboard', searchQuery: '' }">
+            <a
+              href="#"
+              class="flex items-center py-2 px-4 rounded hover:bg-gray-700 transition duration-200 bg-blue-700"
+              >    <svg class="w-5 h-5 mr-2 text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7 7 7-7m-2-2l2 2m-2-2V3" />
+              </svg>Dashboard</a
+            >
+          </li>
+         <!-- Users -->
+  <li class="menu-item"  x-data="{ open: false, label: 'Users', searchQuery: '' }">
+    <a
+      href="#"
+      class="flex items-center py-2 px-4 rounded hover:bg-gray-700 transition duration-200"
+    >
+      <svg
+        class="w-5 h-5 mr-3 text-gray-300"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M17 20h5V10H2v10h5m10 0V10a2 2 0 012-2h3m-8 0a2 2 0 00-2-2h-4a2 2 0 00-2 2v10m8 0h-8"
+        />
+      </svg>
+      Users
+    </a>
+  </li>
+
+  <!-- Reports -->
+  <li class="menu-item"  x-data="{ open: false, label: 'Payments' , searchQuery: '' }">
+    <a
+      href="#"
+      class="flex items-center py-2 px-4 rounded hover:bg-gray-700 transition duration-200"
+    >
+      <svg
+        class="w-5 h-5 mr-3 text-gray-300"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M9 17v-4H7v4H5l5 5 5-5h-2v-4h-2v4h-2z"
+        />
+      </svg>
+      Payments
+    </a>
+  </li>
+
+
+
+
+  <!-- Settings -->
+<li class="menu-item"  x-data="{ open: false, label: 'Reports' , searchQuery: ''}">
+    <button
+      class="flex items-center justify-between py-2 px-4 w-full rounded hover:bg-gray-700 transition duration-200"
+      @click="open = !open" 
+    >
+      <span class="flex items-center">
+        <svg
+          class="w-5 h-5 mr-3 text-gray-300"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M11.25 2.75v3.75m0 0h3.75m-3.75 0H7.5m3.75 12.5v3.75m0 0h3.75m-3.75 0H7.5m3.75-8.75v3.75m0 0h3.75m-3.75 0H7.5M7.5 7.5h3.75M7.5 12.5h3.75M7.5 17.5h3.75"
+          />
+        </svg>
+        Reports
+      </span>
+      <svg
+        class="w-4 h-4 text-gray-300 transition-transform transform"
+        :class="open ? 'rotate-180' : 'rotate-0'" 
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M5 15l7-7 7 7"
+        />
+      </svg>
+    </button>
+  
+    <!-- Dropdown menu with transition -->
+    <ul 
+      x-show="open" 
+      @click.away="open = false" 
+      nsition 
+      x-transition:enter="transition-all duration-300 ease-in-out"
+      x-transition:enter-start="opacity-0 transform scale-95"
+      x-transition:enter-end="opacity-100 transform scale-100"
+      x-transition:leave="transition-all duration-300 ease-in-out"
+      x-transition:leave-start="opacity-100 transform scale-100"
+      x-transition:leave-end="opacity-0 transform scale-95"
+      class="pl-6 overflow-hidden shadow-lg rounded-lg bg-gray-800"
+    >
+      <!-- Profile Item -->
+      <li class="menu-item">
+        <a
+          href="#"
+          class="flex items-center py-2 text-gray-300 hover:text-white transition duration-200 hover:bg-gradient-to-r hover:from-blue-600 hover:to-blue-500 rounded-lg transform hover:scale-105"
+        >
+          <svg
+            class="w-5 h-5 mr-3 transition-transform transform hover:scale-110"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5.121 17.804A9 9 0 1117.805 5.121M12 7v5l3 3"
+            />
+          </svg>
+          Daily Report
+        </a>
+      </li>
+  
+      <!-- Security Item -->
+      <li class="menu-item">
+        <a
+          href="#"
+          class="flex items-center py-2 text-gray-300 hover:text-white transition duration-200 hover:bg-gradient-to-r hover:from-green-600 hover:to-green-500 rounded-lg transform hover:scale-105"
+        >
+          <svg
+            class="w-5 h-5 mr-3 transition-transform transform hover:scale-110"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M16 7a4 4 0 010 8m4-4a4 4 0 01-8 0 4 4 0 018 0m4 4H4"
+            />
+          </svg>
+          Sales Report
+        </a>
+      </li>
+    </ul>
+  </li>
+
+    <!-- Settings -->
+<li class="menu-item"  x-data="{ open: false, label: 'Settings'}">
+    <button
+      class="flex items-center justify-between py-2 px-4 w-full rounded hover:bg-gray-700 transition duration-200"
+      @click="open = !open" 
+    >
+      <span class="flex items-center">
+        <svg
+          class="w-5 h-5 mr-3 text-gray-300"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M11.25 2.75v3.75m0 0h3.75m-3.75 0H7.5m3.75 12.5v3.75m0 0h3.75m-3.75 0H7.5m3.75-8.75v3.75m0 0h3.75m-3.75 0H7.5M7.5 7.5h3.75M7.5 12.5h3.75M7.5 17.5h3.75"
+          />
+        </svg>
+        Settings
+      </span>
+      <svg
+        class="w-4 h-4 text-gray-300 transition-transform transform"
+        :class="open ? 'rotate-180' : 'rotate-0'" 
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M5 15l7-7 7 7"
+        />
+      </svg>
+    </button>
+    <!-- Dropdown menu, x-show="open" toggles visibility based on 'open' state -->
+    <ul x-show="open" @click.away="open = false" 
+          x-transition:enter="transition-all duration-300 ease-in-out"
+          x-transition:enter-start="opacity-0 max-h-0"
+          x-transition:enter-end="opacity-100 max-h-screen"
+          x-transition:leave="transition-all duration-300 ease-in-out"
+          x-transition:leave-start="opacity-100 max-h-screen"
+          x-transition:leave-end="opacity-0 max-h-0"
+          class="pl-6"
+          transition 
+    >
+      <li class="menu-item">
+        <a
+          href="#"
+          class="flex items-center py-2 text-gray-300 hover:text-white transition duration-200"
+        >
+          <svg
+            class="w-5 h-5 mr-3"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5.121 17.804A9 9 0 1117.805 5.121M12 7v5l3 3"
+            />
+          </svg>
+          Profile
+        </a>
+      </li>
+      <li class="menu-item">
+        <a
+          href="#"
+          class="flex items-center py-2 text-gray-300 hover:text-white transition duration-200"
+        >
+          <svg
+            class="w-5 h-5 mr-3"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M16 7a4 4 0 010 8m4-4a4 4 0 01-8 0 4 4 0 018 0m4 4H4"
+            />
+          </svg>
+          Security
+        </a>
+      </li>
+
+      
+    </ul>
+  </li>
+
+</ul>
+
+      </div>
+
+      <!-- Main Content -->
+      <div
+        class="bg-white p-6 w-full ml-0 transition-all duration-300 ease-in-out md:ml-64"
+        id="content"
+      >
+        <!-- Header -->
+        <header class="flex items-center justify-between border-b pb-4 mb-6">
+          <div class="flex items-center">
+            <!-- Hamburger icon -->
+            <button id="hamburger" class="text-gray-900 focus:outline-none">
+              <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                ></path>
+              </svg>
+            </button>
+            <h1 class="ml-4 text-3xl font-semibold text-gray-900">Dashboard</h1>
+          </div>
+          <div x-data="{ dropopen: false }" class="relative" @click.away="dropopen = false">
+            <!-- User Icon -->
+            <button 
+              @click="dropopen = !dropopen" 
+              class="flex items-center justify-center w-10 h-10 bg-gray-200 rounded-full focus:outline-none"
+              
+            >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" xml:space="preserve"><path fill="#282828" d="M135.832 140.848h-70.9c-2.9 0-5.6-1.6-7.4-4.5-1.4-2.3-1.4-5.7 0-8.6l4-8.2c2.8-5.6 9.7-9.1 14.9-9.5 1.7-.1 5.1-.8 8.5-1.6 2.5-.6 3.9-1 4.7-1.3-.2-.7-.6-1.5-1.1-2.2-6-4.7-9.6-12.6-9.6-21.1 0-14 9.6-25.3 21.5-25.3s21.5 11.4 21.5 25.3c0 8.5-3.6 16.4-9.6 21.1-.5.7-.9 1.4-1.1 2.1.8.3 2.2.7 4.6 1.3 3 .7 6.6 1.3 8.4 1.5 5.3.5 12.1 3.8 14.9 9.4l3.9 7.9c1.5 3 1.5 6.8 0 9.1-1.6 2.9-4.4 4.6-7.2 4.6zm-35.4-78.2c-9.7 0-17.5 9.6-17.5 21.3 0 7.4 3.1 14.1 8.2 18.1.1.1.3.2.4.4 1.4 1.8 2.2 3.8 2.2 5.9 0 .6-.2 1.2-.7 1.6-.4.3-1.4 1.2-7.2 2.6-2.7.6-6.8 1.4-9.1 1.6-4.1.4-9.6 3.2-11.6 7.3l-3.9 8.2c-.8 1.7-.9 3.7-.2 4.8.8 1.3 2.3 2.6 4 2.6h70.9c1.7 0 3.2-1.3 4-2.6.6-1 .7-3.4-.2-5.2l-3.9-7.9c-2-4-7.5-6.8-11.6-7.2-2-.2-5.8-.8-9-1.6-5.8-1.4-6.8-2.3-7.2-2.5-.4-.4-.7-1-.7-1.6 0-2.1.8-4.1 2.2-5.9.1-.1.2-.3.4-.4 5.1-3.9 8.2-10.7 8.2-18-.2-11.9-8-21.5-17.7-21.5z"/></svg>
+              
+            </button>
+          
+            <!-- Dropdown Menu -->
+            <div 
+              x-show="dropopen" 
+              x-transition 
+              class="absolute right-0 mt-2 w-48 bg-white shadow-md rounded-lg overflow-hidden z-10"
+              @click.outside="dropopen = false" 
+            >
+              <a 
+                href="/profile" 
+                class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition"
+              >
+                Profile
+              </a>
+              <a 
+                href="/logout" 
+                class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition"
+              >
+                Logout
+              </a>
+            </div>
+          </div>
+        </header>
+
+        <!-- Content -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div
+            class="bg-white p-6 shadow-xl rounded-lg hover:shadow-2xl transition duration-200"
+          >
+            <h3 class="text-xl font-semibold mb-4">Total Users</h3>
+            <p class="text-2xl font-bold text-gray-800">1,245</p>
+          </div>
+          <div
+            class="bg-white p-6 shadow-xl rounded-lg hover:shadow-2xl transition duration-200"
+          >
+            <h3 class="text-xl font-semibold mb-4">Active Sessions</h3>
+            <p class="text-2xl font-bold text-gray-800">342</p>
+          </div>
+          <div
+            class="bg-white p-6 shadow-xl rounded-lg hover:shadow-2xl transition duration-200"
+          >
+            <h3 class="text-xl font-semibold mb-4">Reports</h3>
+            <p class="text-2xl font-bold text-gray-800">15 New</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const hamburger = document.getElementById("hamburger");
+      const sidebar = document.getElementById("sidebar");
+      const content = document.getElementById("content");
+
+      // Toggle sidebar visibility when hamburger is clicked
+      hamburger.addEventListener("click", () => {
+        sidebar.classList.toggle("hidden");
+        sidebar.classList.toggle("-translate-x-full");
+        sidebar.classList.toggle("translate-x-0");
+        sidebar.classList.toggle("md:-translate-x-full"); // Toggles sidebar visibility
+        // Adjust main content width based on sidebar visibility
+        if (sidebar.classList.contains("md:-translate-x-full")) {
+          content.classList.remove("md:ml-64");
+        } else {
+          content.classList.add("md:ml-64");
+        }
+      });
+
+      // Hide sidebar when clicking outside of it
+      document.addEventListener("click", (event) => {
+        const isClickInsideSidebar = sidebar.contains(event.target);
+        const isClickOnHamburger = hamburger.contains(event.target);
+
+        if (
+          !isClickInsideSidebar &&
+          !isClickOnHamburger &&
+          !sidebar.classList.contains("hidden")
+        ) {
+          sidebar.classList.add("hidden");
+          sidebar.classList.remove("translate-x-0");
+          sidebar.classList.add("-translate-x-full");
+        }
+      });
+
+const searchInput = document.getElementById("searchInput");
+const menuItems = document.querySelectorAll(".menu-item");
+const noResults = document.getElementById("noResults");
+
+searchInput.addEventListener("input", () => {
+  const query = searchInput.value.toLowerCase().trim();
+  let hasResults = false;
+
+  // Hide the "No results found" message by default
+  noResults.style.display = "none";
+
+  // Loop through all menu items
+  menuItems.forEach((item) => {
+    const text = item.textContent.toLowerCase();
+
+    // If search query is empty, reset all items to their default state
+    if (!query) {
+      item.style.display = ""; // Reset to default display
+      const submenu = item.querySelector("ul[x-show]");
+      if (submenu) {
+        submenu.style.display = "none"; // Ensure submenu remains collapsed
+      }
+    } else {
+      // Show items that match the query, hide others
+      if (text.includes(query)) {
+        item.style.display = "block"; // Show matching items
+        hasResults = true;
+
+        // Open the submenu if it exists and the parent item matches
+        const submenu = item.querySelector("ul[x-show]");
+        if (submenu) {
+          submenu.style.display = "block";
+        }
+      } else {
+        item.style.display = "none"; // Hide non-matching items
+      }
+    }
+  });
+
+  // Show or hide "No results found" message
+  noResults.style.display = hasResults || !query ? "none" : "block";
+});
+    </script>
+  </body>
+</html>
