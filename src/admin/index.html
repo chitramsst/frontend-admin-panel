@@ -17,235 +17,236 @@
   <body class="bg-gray-100 h-screen w-full" x-data="{'menu':true}">
     <div class="flex h-full">
       <!-- sidebar -->
-      <aside
-        class="bg-white fixed shadow-xl border-r-2 pt-10 w-64 h-full p-6 transition-transform duration-300 ease-in-out transform top-0 left-0"
-        x-show="menu"
-        :class="menu ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'"
-        x-cloak
-      >
-        <ul
-          class="mb-10 flex flex-col items-center justify-between text-gray-500 w-full space-y-2 text-sm font-semibold"
-        >
-          <li class="w-full">
-            <a
-              href="#"
-              class="active bg-purple-600 flex items-center rounded px-3 py-2 text-white hover:text-black hover:bg-gray-50 transition-all"
-            >
-              <i data-feather="home" style="width: 1.2em" class="mr-3"></i>
-              <span class="flex-grow">Home</span>
-            </a>
-          </li>
-          <li class="w-full">
-            <a
-              href="#"
-              class="active flex items-center rounded px-3 py-2 hover:bg-gray-50 transition-all"
-            >
-              <i data-feather="columns" style="width: 1.2em" class="mr-3"></i>
-              <span class="flex-grow">Dashboard</span>
-            </a>
-          </li>
-          <li class="w-full">
-            <a
-              href="#"
-              class="flex items-center rounded px-3 py-2 hover:text-black hover:bg-gray-50 transition-all"
-            >
-              <i data-feather="anchor" style="width: 1.2em" class="mr-3"></i>
+   <!-- sidebar -->
+   <aside
+   class="bg-white fixed shadow-xl border-r-2 pt-10 w-64 h-full p-6 transition-transform duration-300 ease-in-out transform top-0 left-0"
+   x-show="menu"
+   :class="menu ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'"
+   x-cloak
+ >
+   <ul
+     class="mb-10 flex flex-col items-center justify-between text-gray-500 w-full space-y-2 text-sm font-semibold"
+   >
+     <li class="w-full">
+       <a
+         href="#"
+         class="active bg-purple-600 flex items-center rounded px-3 py-2 text-white hover:text-purple-700 hover:bg-gray-50 transition-all"
+       >
+         <i data-feather="home" style="width: 1.2em" class="mr-3"></i>
+         <span class="flex-grow">Home</span>
+       </a>
+     </li>
+     <li class="w-full">
+       <a
+         href="#"
+         class="active flex items-center rounded px-3 py-2 hover:text-purple-700  hover:bg-gray-50 transition-all"
+       >
+         <i data-feather="columns" style="width: 1.2em" class="mr-3"></i>
+         <span class="flex-grow">Dashboard</span>
+       </a>
+     </li>
+     <li class="w-full">
+       <a
+         href="#"
+         class="flex items-center rounded px-3 py-2 hover:text-purple-700 hover:bg-gray-50 transition-all"
+       >
+         <i data-feather="anchor" style="width: 1.2em" class="mr-3"></i>
 
-              <span class="flex-grow">Pos</span>
-            </a>
-          </li>
-          <!-- <li class='border my-2 border-gray-200 h-[0.1px] w-full'></li> -->
-          <li class="border-t border-gray-200 my-2 h-px w-full"></li>
-          <li class="w-full">
-            <a
-              href="#"
-              class="flex items-center rounded px-3 py-2 hover:text-black hover:bg-gray-50 transition-all"
-            >
-              <i data-feather="list" style="width: 1.2em" class="mr-3"></i>
+         <span class="flex-grow">Pos</span>
+       </a>
+     </li>
+     <!-- <li class='border my-2 border-gray-200 h-[0.1px] w-full'></li> -->
+     <li class="border-t border-gray-200 my-2 h-px w-full"></li>
+     <li class="w-full">
+       <a
+         href="#"
+         class="flex items-center rounded px-3 py-2 hover:text-purple-700 hover:bg-gray-50 transition-all"
+       >
+         <i data-feather="list" style="width: 1.2em" class="mr-3"></i>
 
-              <span class="flex-grow">Sales List</span>
-            </a>
-          </li>
-          <li
-            class="w-full"
-            x-data="{ open: false, label: 'Reports' , searchQuery: ''}"
-            @click.away="open = false"
-          >
-            <a
-              href="#"
-              class="flex items-center rounded-t-xl px-3 py-2 hover:text-black  transition-all"
-              @click="open = !open"
-              :class="open ? 'bg-gray-200' : ''"
-            >
-              <i data-feather="sliders" style="width: 1.2em" class="mr-3"></i>
+         <span class="flex-grow">Sales List</span>
+       </a>
+     </li>
+     <li
+       class="w-full"
+       x-data="{ open: false, label: 'Reports' , searchQuery: ''}"
+       @click.away="open = false"
+     >
+       <a
+         href="#"
+         class="flex items-center rounded-t-xl px-3 py-2 hover:text-purple-700  transition-all"
+         @click="open = !open"
+         :class="open ? 'bg-gray-200' : ''"
+       >
+         <i data-feather="sliders" style="width: 1.2em" class="mr-3"></i>
 
-              <span class="flex-grow">Service</span>
-              <p
-                class="w-5 h-5 transition-transform duration-300"
-                :class="open ? 'rotate-180' : 'rotate-0'"
-              >
-                <i data-feather="chevron-down" style="width: 1.2em"></i>
-              </p>
-            </a>
-            <ul class="w-full pl-3 bg-purple-200 rounded-b-xl" x-show="open">
-              <li class="w-full">
-                <a
-                  href="#"
-                  class="flex items-center rounded px-3 py-2 hover:text-black  transition-all"
-                >
-                  <i data-feather="code" style="width: 1em" class="mr-3"></i>
+         <span class="flex-grow">Service</span>
+         <p
+           class="w-5 h-5 transition-transform duration-300"
+           :class="open ? 'rotate-180' : 'rotate-0'"
+         >
+           <i data-feather="chevron-down" style="width: 1.2em"></i>
+         </p>
+       </a>
+       <ul class="w-full pl-3 bg-purple-200 rounded-b-xl" x-show="open">
+         <li class="w-full">
+           <a
+             href="#"
+             class="flex items-center rounded px-3 py-2 hover:text-purple-700  transition-all"
+           >
+             <i data-feather="code" style="width: 1em" class="mr-3"></i>
 
-                  <span class="flex-grow">Services</span>
-                </a>
-              </li>
-              <li class="w-full">
-                <a
-                  href="#"
-                  class="flex items-center rounded px-3 py-2 hover:text-black  transition-all"
-                >
-                  <i data-feather="code" style="width: 1em" class="mr-3"></i>
+             <span class="flex-grow">Services</span>
+           </a>
+         </li>
+         <li class="w-full">
+           <a
+             href="#"
+             class="flex items-center rounded px-3 py-2 hover:text-purple-700  transition-all"
+           >
+             <i data-feather="code" style="width: 1em" class="mr-3"></i>
 
-                  <span class="flex-grow">Service Types</span>
-                </a>
-              </li>
-              <li class="w-full">
-                <a
-                  href="#"
-                  class="flex items-center rounded px-3 py-2 hover:text-black transition-all"
-                >
-                  <i data-feather="code" style="width: 1em" class="mr-3"></i>
+             <span class="flex-grow">Service Types</span>
+           </a>
+         </li>
+         <li class="w-full">
+           <a
+             href="#"
+             class="flex items-center rounded px-3 py-2 hover:text-purple-700 transition-all"
+           >
+             <i data-feather="code" style="width: 1em" class="mr-3"></i>
 
-                  <span class="flex-grow">Addons</span>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="w-full">
-            <a
-              href="#"
-              class="flex items-center rounded px-3 py-2 hover:text-black hover:bg-gray-50 transition-all"
-            >
-              <i data-feather="users" style="width: 1.2em" class="mr-3"></i>
+             <span class="flex-grow">Addons</span>
+           </a>
+         </li>
+       </ul>
+     </li>
+     <li class="w-full">
+       <a
+         href="#"
+         class="flex items-center rounded px-3 py-2 hover:text-purple-700 hover:bg-gray-50 transition-all"
+       >
+         <i data-feather="users" style="width: 1.2em" class="mr-3"></i>
 
-              <span class="flex-grow">Customers</span>
-            </a>
-          </li>
-          <li
-            class="w-full"
-            x-data="{ open: false, label: 'Reports' , searchQuery: ''}"
-            @click.away="open = false"
-          >
-          <a
-          href="#"
-          class="flex items-center rounded-t-xl px-3 py-2 hover:text-black  transition-all"
-          @click="open = !open"
-          :class="open ? 'bg-gray-200' : ''"
-        >
-              <i data-feather="briefcase" style="width: 1.2em" class="mr-3"></i>
+         <span class="flex-grow">Customers</span>
+       </a>
+     </li>
+     <li
+       class="w-full"
+       x-data="{ open: false, label: 'Reports' , searchQuery: ''}"
+       @click.away="open = false"
+     >
+     <a
+     href="#"
+     class="flex items-center rounded-t-xl px-3 py-2 hover:text-purple-700  transition-all"
+     @click="open = !open"
+     :class="open ? 'bg-gray-200' : ''"
+   >
+         <i data-feather="briefcase" style="width: 1.2em" class="mr-3"></i>
 
-              <span class="flex-grow">Expense</span>
-              <p
-                class="w-5 h-5 transition-transform duration-300"
-                :class="open ? 'rotate-180' : 'rotate-0'"
-              >
-                <i data-feather="chevron-down" style="width: 1.2em"></i>
-              </p>
-            </a>
-            <ul class="w-full pl-3 bg-purple-200 rounded-b-xl" x-show="open">
-              <li class="w-full">
-                <a
-                  href="#"
-                  class="flex items-center rounded px-3 py-2 hover:text-black  transition-all"
-                >
-                  <i data-feather="code" style="width: 1em" class="mr-3"></i>
+         <span class="flex-grow">Expense</span>
+         <p
+           class="w-5 h-5 transition-transform duration-300"
+           :class="open ? 'rotate-180' : 'rotate-0'"
+         >
+           <i data-feather="chevron-down" style="width: 1.2em"></i>
+         </p>
+       </a>
+       <ul class="w-full pl-3 bg-purple-200 rounded-b-xl" x-show="open">
+         <li class="w-full">
+           <a
+             href="#"
+             class="flex items-center rounded px-3 py-2 hover:text-purple-700  transition-all"
+           >
+             <i data-feather="code" style="width: 1em" class="mr-3"></i>
 
-                  <span class="flex-grow">Expenses</span>
-                </a>
-              </li>
-              <li class="w-full">
-                <a
-                  href="#"
-                  class="flex items-center rounded px-3 py-2 hover:text-black  transition-all"
-                >
-                  <i data-feather="code" style="width: 1em" class="mr-3"></i>
+             <span class="flex-grow">Expenses</span>
+           </a>
+         </li>
+         <li class="w-full">
+           <a
+             href="#"
+             class="flex items-center rounded px-3 py-2 hover:text-purple-700  transition-all"
+           >
+             <i data-feather="code" style="width: 1em" class="mr-3"></i>
 
-                  <span class="flex-grow">Expense Categories</span>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="w-full">
-            <a
-              href="#"
-              class="flex items-center rounded px-3 py-2 hover:text-black hover:bg-gray-50 transition-all"
-            >
-              <i
-                data-feather="dollar-sign"
-                style="width: 1.2em"
-                class="mr-3"
-              ></i>
+             <span class="flex-grow">Expense Categories</span>
+           </a>
+         </li>
+       </ul>
+     </li>
+     <li class="w-full">
+       <a
+         href="#"
+         class="flex items-center rounded px-3 py-2 hover:text-purple-700 hover:bg-gray-50 transition-all"
+       >
+         <i
+           data-feather="dollar-sign"
+           style="width: 1.2em"
+           class="mr-3"
+         ></i>
 
-              <span class="flex-grow">Payments</span>
-            </a>
-          </li>
-          <li class="border-t border-gray-200 my-2 h-px w-full"></li>
-          <li
-            class="w-full"
-            x-data="{ open: false, label: 'Reports' , searchQuery: ''}"
-            @click.away="open = false"
-          >
-          <a
-          href="#"
-          class="flex items-center rounded-t-xl px-3 py-2 hover:text-black  transition-all"
-          @click="open = !open"
-          :class="open ? 'bg-gray-200' : ''"
-        >
-              <i data-feather="key" style="width: 1.2em" class="mr-3"></i>
+         <span class="flex-grow">Payments</span>
+       </a>
+     </li>
+     <li class="border-t border-gray-200 my-2 h-px w-full"></li>
+     <li
+       class="w-full"
+       x-data="{ open: false, label: 'Reports' , searchQuery: ''}"
+       @click.away="open = false"
+     >
+     <a
+     href="#"
+     class="flex items-center rounded-t-xl px-3 py-2 hover:text-purple-700  transition-all"
+     @click="open = !open"
+     :class="open ? 'bg-gray-200' : ''"
+   >
+         <i data-feather="key" style="width: 1.2em" class="mr-3"></i>
 
-              <span class="flex-grow">Settings</span>
-              <p
-                class="w-5 h-5 transition-transform duration-300"
-                :class="open ? 'rotate-180' : 'rotate-0'"
-              >
-                <i data-feather="chevron-down" style="width: 1.2em"></i>
-              </p>
-            </a>
-            <ul class="w-full pl-3 bg-purple-200 rounded-b-xl" x-show="open" x-collapse>
-              <li class="w-full">
-                <a
-                  href="#"
-                  class="flex items-center rounded px-3 py-2 hover:text-black  transition-all"
-                >
-                  <i data-feather="code" style="width: 1em" class="mr-3"></i>
+         <span class="flex-grow">Settings</span>
+         <p
+           class="w-5 h-5 transition-transform duration-300"
+           :class="open ? 'rotate-180' : 'rotate-0'"
+         >
+           <i data-feather="chevron-down" style="width: 1.2em"></i>
+         </p>
+       </a>
+       <ul class="w-full pl-3 bg-purple-200 rounded-b-xl" x-show="open" x-collapse>
+         <li class="w-full">
+           <a
+             href="#"
+             class="flex items-center rounded px-3 py-2 hover:text-purple-700  transition-all"
+           >
+             <i data-feather="code" style="width: 1em" class="mr-3"></i>
 
-                  <span class="flex-grow">Master Settings</span>
-                </a>
-              </li>
-              <li class="w-full">
-                <a
-                  href="#"
-                  class="flex items-center rounded px-3 py-2 hover:text-black  transition-all"
-                >
-                  <i data-feather="code" style="width: 1em" class="mr-3"></i>
+             <span class="flex-grow">Master Settings</span>
+           </a>
+         </li>
+         <li class="w-full">
+           <a
+             href="#"
+             class="flex items-center rounded px-3 py-2 hover:text-purple-700  transition-all"
+           >
+             <i data-feather="code" style="width: 1em" class="mr-3"></i>
 
-                  <span class="flex-grow">Company Settings</span>
-                </a>
-              </li>
-            </ul>
-          </li>
+             <span class="flex-grow">Company Settings</span>
+           </a>
+         </li>
+       </ul>
+     </li>
 
-          <!-- Logout Button -->
-          <li class="w-full">
-            <a
-              href="#"
-              class="flex items-center rounded px-3 py-2 text-purple-600 hover:text-black  transition-all"
-            >
-              <i data-feather="log-out" style="width: 1.2em" class="mr-3"></i>
-              <span class="flex-grow">Logout</span>
-            </a>
-          </li>
-        </ul>
-      </aside>
+     <!-- Logout Button -->
+     <li class="w-full">
+       <a
+         href="#"
+         class="flex items-center rounded px-3 py-2 text-purple-600 hover:text-purple-700  transition-all"
+       >
+         <i data-feather="log-out" style="width: 1.2em" class="mr-3"></i>
+         <span class="flex-grow">Logout</span>
+       </a>
+     </li>
+   </ul>
+ </aside>
       <div class="h-full w-full"  :class="menu ? 'ml-64' : 'ml-0'">
         <!-- header -->
         <div
@@ -694,7 +695,7 @@
             >
             <a
             href="#"
-            class="flex items-center rounded px-3 py-2 text-gray-600 hover:text-black hover:bg-gray-50 transition-all"
+            class="flex items-center rounded px-3 py-2 text-gray-600 hover:text-purple-700 hover:bg-gray-50 transition-all"
           >
             <i data-feather="user" style="width: 1.2em" class="mr-3"></i>
             <span class="flex-grow">Profile</span>
@@ -702,7 +703,7 @@
           <p class="border-t border-gray-200 my-2 h-px w-full"></p>
               <a
               href="#"
-              class="flex items-center rounded px-3 py-2 text-purple-600 hover:text-black hover:bg-gray-50 transition-all"
+              class="flex items-center rounded px-3 py-2 text-purple-600 hover:text-purple-700 hover:bg-gray-50 transition-all"
             >
               <i data-feather="log-out" style="width: 1.2em" class="mr-3"></i>
               <span class="flex-grow">Logout</span>
