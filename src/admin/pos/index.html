@@ -6,37 +6,76 @@
     <title>Admin Panel</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js"
+      defer
+    ></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <script src="/src/admin/assets/js/app.js" defer></script>
   </head>
-  <body class="bg-gray-100 h-screen w-full" x-data="{'menu':true}">
+  <body class="bg-gray-100 h-screen w-full" x-data="{'menu':true, 'showBack': window.location.pathname.includes('/src/admin/pos') }">
     <div class="flex h-full">
-      <div id="sidebar-container"></div>
-      <div class="h-full w-full" :class="menu ? 'ml-64' : 'ml-0'">
+      <!-- <div id="sidebar-container"></div> -->
+      <div class="h-full w-full" >
         <div id="header-container"></div>
         <!-- content -->
         <div class="p-6 text-sm h-full">
-          <div class="grid grid-cols-1 gap-6 w-full p-4  h-[90%]">
+          <div class="grid grid-cols-1 gap-6 w-full p-4 h-[90%]">
             <!-- Table Card -->
-            <div class="shadow-2xl border-b-4 bg-white p-4 border-gray-300 rounded-2xl">
+            <div
+              class="shadow-2xl border-b-4 bg-white p-4 border-gray-300 rounded-2xl"
+            >
               <div class="flex justify-between items-center my-1">
                 <h3 class="text-lg font-bold mb-3 text-purple-600">Pos</h3>
-                <button class="py-2 px-3 bg-purple-600 text-white rounded-md mb-3 font-semibold">Add</button>
+                <button
+                  class="py-2 px-3 bg-purple-600 text-white rounded-md mb-3 font-semibold"
+                >
+                  Add
+                </button>
               </div>
-              <div class="grid grid-cols-1 2xl:grid-cols-2  xl:grid-cols-2 gap-6 h-screen">
+              <div
+                class="grid grid-cols-1 2xl:grid-cols-2 xl:grid-cols-2 gap-6 h-screen"
+              >
                 <!-- Items Section -->
-                <div class="grid grid-cols-1 2xl:grid-cols-4 md:grid-cols-2 xl:grid-cols-3 gap-4 overflow-y-auto p-2 h-[90vh]">
+                <div
+                  class="grid grid-cols-1 2xl:grid-cols-4 md:grid-cols-2 xl:grid-cols-3 gap-4 overflow-y-auto p-2 h-[90vh]"
+                >
+                  <input type="text" placeholder="Search Item" />
+
                   <!-- Card Items -->
                   <template x-for="i in 20" :key="i">
-                    <div class="flex flex-col items-center border p-4 rounded-lg shadow-lg bg-white  w-full">
-                    <div class="h-20 w-full bg-gray-100 rounded-xl mb-2">
-                      <!-- <img src="/src/admin/assets/images/empty_image.jpg" alt="Item Image" class="w-full object-cover rounded-t-lg"> -->
-                    </div>
+                    <div
+                      class="flex flex-col items-center border p-4 rounded-lg shadow-lg bg-white w-full"
+                    >
+                      <div class="h-20 w-full bg-gray-100 rounded-xl mb-2">
+                        <!-- <img src="/src/admin/assets/images/empty_image.jpg" alt="Item Image" class="w-full object-cover rounded-t-lg"> -->
+                      </div>
+                      <!-- <div
+                        @click="counts[i] = 1"
+                        class="flex flex-row gap-5 border rounded-xl px-3 py-1 justify-between items-center w-full bg-yellow-500 text-white hover:bg-purple-200"
+                      >
+                        <p class="text-xs font-bold">Add</p>
+                        <i
+                          data-feather="plus-circle"
+                          class="mr-3 w-5 h-5 py-1 font-bold text-white"
+                        ></i> 
+                      </div> -->
                       <div class="flex items-center justify-between w-full p-2">
-                        <button @click="decreaseCount('count-'+i)" class="bg-gray-500 text-white px-3 py-1 rounded">-</button>
-                        <span :id="'count-'+i" class="text-lg font-bold">0</span>
-                        <button @click="increaseCount('count-'+i)" class="bg-yellow-500 text-white px-3 py-1 rounded">+</button>
+                        <button
+                          @click="decreaseCount('count-'+i)"
+                          class="bg-gray-500 text-white px-3 py-1 rounded"
+                        >
+                          -
+                        </button>
+                        <span :id="'count-'+i" class="text-lg font-bold"
+                          >0</span
+                        >
+                        <button
+                          @click="increaseCount('count-'+i)"
+                          class="bg-yellow-500 text-white px-3 py-1 rounded"
+                        >
+                          +
+                        </button>
                       </div>
                     </div>
                   </template>
@@ -61,6 +100,13 @@
           countElement.textContent = currentCount - 1;
         }
       }
+    </script>
+    <script>
+      document.addEventListener("alpine:init", () => {
+        Alpine.data("cart", () => ({
+          counts: Array(20).fill(0), // Array to store counts for each item
+        }));
+      });
     </script>
   </body>
 </html>

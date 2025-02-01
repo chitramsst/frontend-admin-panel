@@ -1,7 +1,7 @@
   <div
     class="w-full h-20 bg-white border-b-2 shadow-2xs text-gray-500 z-10 flex items-center p-6 justify-between"
   >
-    <div @click="{menu=!menu}">
+    <div @click="{menu=!menu}" x-show="!showBack">
       <div class="flex">
         <i
           data-feather="align-justify"
@@ -10,6 +10,16 @@
         ></i>
         <p class="px-5 text-xl font-bold text-purple-600">Content Title</p>
       </div>
+    </div>
+    <div>
+      <a href="/src/admin/sales/sales-list.html" class="flex" x-show="showBack">
+        <i
+          data-feather="arrow-left"
+          style="width: 1.2em"
+          class="mr-3 font-bold text-purple-800"
+        ></i> 
+        <p class="px-5 text-xl font-bold text-purple-600">Content Title</p>
+      </a>
     </div>
     <div
       x-data="{ dropopen: false }"
