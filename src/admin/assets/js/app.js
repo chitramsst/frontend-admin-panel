@@ -15,7 +15,7 @@
     // Function to load the HTML content dynamically after scripts are ready
     function loadHTMLContent() {
       // Load the header, footer, or any other content dynamically
-      fetch("header.html")
+      fetch("/src/admin/header.html")
         .then((response) => response.text())
         .then((headerHTML) => {
           document.querySelector("#header-container").innerHTML =
@@ -26,7 +26,7 @@
     }
 
     // Load the header, footer, or any other content dynamically
-    fetch("sidebar.html")
+    fetch("/src/admin/sidebar.html")
       .then((response) => response.text())
       .then((sidebarHTML) => {
         document.querySelector("#sidebar-container").innerHTML =
