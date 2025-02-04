@@ -20,9 +20,18 @@
       menu: true, 
       showBack: window.location.pathname.includes('/src/admin/pos'),
       searchQuery: '',
+      customerQuery: '',
       counts: Array(20).fill(0),
       items: Array.from({ length: 20 }, (_, i) => `Item ${i + 1}`), // Generate item names dynamically
-      categories: Array.from({ length: 20 }, (_, i) => `Category ${i + 1}`) // Generate item names dynamically
+      categories: Array.from({ length: 20 }, (_, i) => `Category ${i + 1}`), // Generate item names dynamically
+      customers: Array.from({ length: 20 }, (_, i) => `Customer ${i + 1}`), // Generate item names dynamically
+      get filteredCustomers() {
+        return this.customerQuery.trim() !== '' 
+        ? this.customers
+            .filter(c => c.toLowerCase().includes(this.customerQuery.toLowerCase()))
+            .slice(0, 5)
+        : [];
+      }
     }"
   >
     <div class="flex h-full">
@@ -38,11 +47,11 @@
             >
               <div class="flex justify-between items-center my-1 p-2">
                 <h3 class="text-lg font-bold mb-3 text-purple-600">POS</h3>
-                <button
+                <!-- <button
                   class="py-2 px-3 bg-purple-600 text-white rounded-md  font-semibold"
                 >
                   Add
-                </button>
+                </button> -->
               </div>
 
               <!-- Main Grid Section -->
@@ -129,8 +138,33 @@
                   </div>
                 </div>
                 <!-- Bill Section -->
-                <div class="bg-white p-4 shadow-md rounded-xl">
-                  <h3 class="text-lg font-bold text-purple-600 mb-3">Bill</h3>
+                <div class="bg-white p-4 border shadow-md rounded-xl">
+                  <!-- <h3 class="text-lg font-bold text-purple-600 mb-3">Bill</h3> -->
+                  <div class="flex justify-between w-full mb-2 mt-2 items-center">
+                   <div class="relative w-full">
+                    <input
+                      type="text"
+                      placeholder="Search Customer"
+                      x-model = "customerQuery"
+                      class="w-full pl-4 pr-10 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    />
+                    <div x-show="filteredCustomers.length > 0" class="absolute w-full bg-white border rounded-lg shadow-lg mt-1 z-50">
+                      <template x-for="customer in filteredCustomers" :key="customer">
+                        <p class="px-4 py-2 hover:bg-gray-100 cursor-pointer" x-text="customer"></p>
+                      </template>
+                    </div>
+                    </div>
+                    <buton class="py-2 px-3 ml-2 flex justify-center items-center bg-purple-600 text-white rounded-md  font-semibold"
+                    >
+                    +
+                    <!-- <i
+                    data-feather="plus"
+                    class="ransform -translate-y-1/2 text-white"
+                  ></i> -->
+                    </button>
+               
+                  </div>
+                 
                   <!-- Bill content goes here -->
                 </div>
               </div>
