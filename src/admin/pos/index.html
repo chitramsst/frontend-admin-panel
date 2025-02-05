@@ -6,55 +6,19 @@
     <title>Admin Panel</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script
+    <!-- <script
       src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js"
       defer
-    ></script>
+    ></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <script src="/src/admin/assets/js/app.js" defer></script>
   </head>
 
   <body
     class="bg-gray-100 h-screen w-full"
-    x-data="{
-      menu: true, 
-      showBack: window.location.pathname.includes('/src/admin/pos'),
-      searchQuery: '',
-      customerQuery: '',
-      counts: Array(20).fill(0),
-      items: Array.from({ length: 20 }, (_, i) => `Item ${i + 1}`), // Generate item names dynamically
-      categories: Array.from({ length: 20 }, (_, i) => `Category ${i + 1}`), // Generate item names dynamically
-      customers: Array.from({ length: 20 }, (_, i) => `Customer ${i + 1}`), // Generate item names dynamically
-      get filteredCustomers() {
-        return this.customerQuery.trim() !== '' 
-        ? this.customers
-            .filter(c => c.toLowerCase().includes(this.customerQuery.toLowerCase()))
-            .slice(0, 5)
-        : [];
-      },
-      products: [],
-      discount: 0,
-      paymentMethod: 'cash',
-      addProduct(name, price) {
-        // Check if product already exists in the list
-        let existingProduct = this.products.find(product => product.name === name);
-        if (existingProduct) {
-            existingProduct.quantity++;
-        } else {
-            this.products.push({ name: name, price: price, quantity: 1 });
-        }
-    }
-    ,
-      removeProduct(index) {
-          this.products.splice(index, 1);
-      },
-      total() {
-          return this.products.reduce((sum, product) => sum + (product.price * product.quantity), 0);
-      },
-      grandTotal() {
-          return this.total() - this.discount;
-      }
-    }"
+    x-data="posSystem"
   >
     <div class="flex h-full">
       <div class="h-full w-full">
@@ -86,13 +50,20 @@
                       class="flex overflow-x-auto w-full snap-x snap-mandatory rounded-lg bg-gray-100"
                     >
                       <!-- Card Items -->
-                      <div class="flex overflow-x-auto p-4 space-x-4 snap-x snap-mandatory">
+                      <!-- <div class="flex overflow-x-auto p-4 space-x-4 snap-x snap-mandatory">
                         <template x-for="(category, i) in categories" :key="i">
                           <div
                             class="flex items-center border px-6 py-2 rounded-lg shadow-lg bg-white h-12 flex-shrink-0 snap-center min-w-[100px] whitespace-nowrap"
                           >
                             <p class="text-gray-500 text-sm text-center" x-text="category"></p>
                           </div>
+                        </template>
+                      </div> -->
+
+                      <div class="flex space-x-4 overflow-x-auto bg-gray-100 p-4 rounded-lg">
+                        <button class="px-4 py-2 bg-blue-600 text-white rounded-md" @click="selectedCategory = null">All</button>
+                        <template x-for="category in categories" :key="category.id">
+                          <button class="px-4 py-2 bg-gray-300 rounded-md" @click="selectedCategory = category.id" x-text="category.name"></button>
                         </template>
                       </div>
 
@@ -118,9 +89,9 @@
                     <!-- Search Bar -->
 
                     <!-- Card Items -->
-                    <template x-for="(item, i) in items" :key="i">
+                    <template x-for="item in filteredItems" :key="item.id">
                       <div  @click="addProduct(item, 50)"
-                        x-show="item.toLowerCase().includes(searchQuery.toLowerCase())"
+                        x-show="item.name.toLowerCase().includes(searchQuery.toLowerCase())"
                         class="flex flex-col items-center border p-4 rounded-lg shadow-lg bg-white max-h-48 w-full"
                       >
                         <div
@@ -130,9 +101,9 @@
                         <div
                           class="flex justify-between items-center w-full mb-1 p-2"
                         >
-                          <p class="text-gray-500 text-xs" x-text="item"></p>
+                          <p class="text-gray-500 text-xs" x-text="item.name"></p>
                           <p class="text-md text-purple-800 italic font-bold">
-                            $50
+                            $<span x-text="item.price"></span>
                           </p>
                         </div>
 
@@ -140,16 +111,16 @@
                           class="flex items-center justify-between w-full p-2"
                         >
                           <button
-                            @click="counts[i] > 0 ? counts[i]-- : 0"
+                            @click="removeProduct(item)"
                             class="bg-gray-500 text-white px-3 py-1 rounded"
                           >
                             -
                           </button>
-                          <span class="text-lg font-bold" x-text="counts[i]"
+                          <span class="text-lg font-bold" 
                             >0</span
                           >
                           <button
-                            @click="counts[i]++"
+                           @click="addProduct(item)"
                             class="bg-yellow-500 text-white px-3 py-1 rounded"
                           >
                             +
@@ -187,7 +158,7 @@
                
                   </div>
                  
-                    <div class="grid grid-cols-4 font-bold border-b py-2">
+                    <div class="grid grid-cols-5 font-bold border-b py-2">
                       <p>Particular</p>
                       <p>Price</p>
                       <p>Quantity</p>
@@ -195,7 +166,7 @@
                     </div>
                     <div class="mb-4">
                       <template x-for="(product, index) in products" :key="index">
-                        <div class="grid grid-cols-4 py-2 border-b items-center">
+                        <div class="grid grid-cols-5 py-2 border-b items-center">
                           <p x-text="product.name"></p>
                           <p x-text="product.price"></p>
                           <div class="flex items-center justify-center">
@@ -204,7 +175,7 @@
                             <button @click="product.quantity++" class="px-2 py-1 bg-gray-300 rounded-md">+</button>
                           </div>
                           <p x-text="(product.price * product.quantity).toFixed(2)"></p>
-                          <button @click="removeProduct(index)" class="text-red-500">
+                          <button @click="removeProductFromList(index)" class="text-red-500">
                             <i data-feather="trash"></i>
                           </button>
                         </div>
@@ -242,7 +213,7 @@
         feather.replace(); // Render Feather icons properly
       });
     </script>
-    <script>
+    <!-- <script>
        document.addEventListener('alpine:init', () => {
         Alpine.data('posBill', () => ({
             customerQuery: '',
@@ -269,6 +240,87 @@
             }
         }));
     });
-    </script>
+    </script> -->
+
+<script>
+  document.addEventListener('alpine:init', () => {
+    Alpine.data('posSystem', () => ({
+      menu: true, 
+      showBack: window.location.pathname.includes('/src/admin/pos'),
+      customerQuery: '',
+            filteredCustomers: [],
+            products: [],
+            discount: 0,
+            searchQuery: '',
+            paymentMethod: 'cash',
+      selectedCategory: null,
+      discount: 0,
+      paymentMethod: 'cash',
+      products: [],
+      customers: Array.from({ length: 20 }, (_, i) => `Customer ${i + 1}`),
+      categories: [
+        { id: 1, name: 'Beverages' },
+        { id: 2, name: 'Snacks' },
+        { id: 3, name: 'Fruits' }
+      ],
+      items: [
+        { id: 1, name: 'Coke', price: 2, category_id: 1 },
+        { id: 2, name: 'Pepsi', price: 2, category_id: 1 },
+        { id: 3, name: 'Chips', price: 1.5, category_id: 2 },
+        { id: 4, name: 'Banana', price: 0.5, category_id: 3 },
+        { id: 5, name: 'Coke', price: 2, category_id: 1 },
+        { id: 6, name: 'Pepsi', price: 2, category_id: 1 },
+        { id: 7, name: 'Chips', price: 1.5, category_id: 2 },
+        { id: 8, name: 'Banana', price: 0.5, category_id: 3 },
+        { id: 9, name: 'Coke', price: 2, category_id: 1 },
+        { id: 10, name: 'Pepsi', price: 2, category_id: 1 }
+      ],
+      get filteredItems() {
+        return this.selectedCategory ? this.items.filter(item => item.category_id === this.selectedCategory) : this.items;
+      },
+      addProduct(item) {
+        let existingProduct = this.products.find(p => p.id === item.id);
+        if (existingProduct) {
+          existingProduct.quantity++;
+        } else {
+          this.products.push({ ...item, quantity: 1 });
+        }
+      },
+      removeProduct(item) {
+        let existingProduct = this.products.find(p => p.id === item.id);
+        if (existingProduct && existingProduct.quantity > 0) {
+          existingProduct.quantity--;
+          if (existingProduct.quantity === 0) {
+            this.products = this.products.filter(p => p.id !== item.id);
+          }
+        }
+      },
+      getProductQuantity(item) {
+        let existingProduct = this.products.find(p => p.id === item.id);
+        return existingProduct ? existingProduct.quantity : 0;
+      },
+      total() {
+        return this.products.reduce((sum, product) => sum + (product.price * product.quantity), 0);
+      },
+      removeProductFromList(index) {
+                this.products.splice(index, 1);
+                this.$nextTick(() => {
+        feather.replace(); // Refresh icons after DOM update
+      });
+            },
+      grandTotal() {
+        return this.total() - this.discount;
+      },
+      get filteredCustomers() {
+        return this.customerQuery.trim() !== '' 
+        ? this.customers
+            .filter(c => c.toLowerCase().includes(this.customerQuery.toLowerCase()))
+            .slice(0, 5)
+        : [];
+      },
+    }));
+  });
+</script>
+
   </body>
 </html>
