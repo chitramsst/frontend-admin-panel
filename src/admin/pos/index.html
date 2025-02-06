@@ -22,24 +22,22 @@
   <body class="bg-gray-100 h-screen w-full" x-data="posSystem">
     <div class="flex h-full">
       <div class="h-full w-full">
-        <div id="header-container"></div>
+        <!-- <div id="header-container"></div> -->
 
         <!-- Content Section -->
-        <div class="p-6 text-sm h-[700px] bg-gray-300">
-          <div class="grid grid-cols-1 gap-6 w-full p-4 max-h-full">
+        <div class="text-sm min-h-screen bg-gray-100">
+          <div class="grid grid-cols-1 gap-6 w-full">
             <!-- Table Card -->
-            <div
-              class="shadow-2xl border-b-4 bg-white p-4 border-gray-300 rounded-2xl"
-            >
-              <div class="flex justify-between items-center my-1 p-2">
+            <div class="shadow-2xl border-b-4 bg-white border-gray-300 h-full ">
+              <div class="flex justify-between items-center  p-2">
                 <h3 class="text-lg font-bold mb-3 text-purple-600">POS</h3>
-               
               </div>
 
               <!-- Main Grid Section -->
-              <div class="grid grid-cols-1 2xl:grid-cols-2 xl:grid-cols-2">
-                
-                <div class=" px-2">
+              <div
+                class="grid grid-cols-1 2xl:grid-cols-2 xl:grid-cols-2 min-h-screen "
+              >
+                <div class="px-2 h-full ">
                   <div class="relative w-full mb-2 mt-2">
                     <input
                       type="text"
@@ -52,35 +50,32 @@
                       class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
                     ></i>
                   </div>
-                  
-                  <div
-                  class="flex overflow-x-auto w-full snap-x snap-mandatory border-b-2 mb-2"
-                >
 
                   <div
-                    class="flex space-x-4 overflow-x-auto p-4 rounded-lg"
+                    class="flex overflow-x-auto w-full snap-x snap-mandatory border-b-2 mb-2"
                   >
-                    <button
-                      class="px-4 py-2 rounded-md"
-                      :class="selectedCategory === null ? 'bg-purple-600 text-white' : 'bg-gray-300'"
-                      @click="selectedCategory = null"
-                    >
-                      All
-                    </button>
-                    <template
-                      x-for="category in categories"
-                      :key="category.id"
-                    >
+                    <div class="flex space-x-4 overflow-x-auto p-4 rounded-lg">
                       <button
                         class="px-4 py-2 rounded-md"
-                        :class="selectedCategory === category.id ? 'bg-purple-600 text-white' : 'bg-gray-300'"
-                        @click="selectedCategory = category.id"
-                        x-text="category.name"
-                      ></button>
-                    </template>
+                        :class="selectedCategory === null ? 'bg-purple-600 text-white' : 'bg-gray-300'"
+                        @click="selectedCategory = null"
+                      >
+                        All
+                      </button>
+                      <template
+                        x-for="category in categories"
+                        :key="category.id"
+                      >
+                        <button
+                          class="px-4 py-2 rounded-md"
+                          :class="selectedCategory === category.id ? 'bg-purple-600 text-white' : 'bg-gray-300'"
+                          @click="selectedCategory = category.id"
+                          x-text="category.name"
+                        ></button>
+                      </template>
+                    </div>
                   </div>
-                </div>
-                
+
                   <!-- Items Section -->
                   <div
                     class="grid grid-cols-1 2xl:grid-cols-4 md:grid-cols-2 xl:grid-cols-3 gap-4 overflow-y-auto p-2 h-[67vh]"
@@ -152,7 +147,6 @@
                       </div>
                     </template>
                   </div>
-                  
                 </div>
                 <!-- Bill Section -->
                 <div class="bg-white p-4 border shadow-md rounded-xl relative">
@@ -198,7 +192,7 @@
                     <div class="grid grid-cols-5 font-bold border-b py-2">
                       <p>Particular</p>
                       <p>Price</p>
-                      <p>Quantity</p> 
+                      <p>Quantity</p>
                       <p>Total</p>
                       <p></p>
                     </div>
@@ -308,35 +302,6 @@
         feather.replace(); // Render Feather icons properly
       });
     </script>
-    <!-- <script>
-       document.addEventListener('alpine:init', () => {
-        Alpine.data('posBill', () => ({
-            customerQuery: '',
-            filteredCustomers: [],
-            products: [],
-            discount: 0,
-            paymentMethod: 'cash',
-            addProduct(name, price) {
-  let existingProduct = this.products.find(product => product.name === name);
-  if (existingProduct) {
-    existingProduct.quantity++;
-  } else {
-    this.products.push({ name: name, price: price, quantity: 1 });
-  }
-},
-            removeProduct(index) {
-                this.products.splice(index, 1);
-            },
-            total() {
-                return this.products.reduce((sum, product) => sum + (product.price * product.quantity), 0);
-            },
-            grandTotal() {
-                return this.total() - this.discount;
-            }
-        }));
-    });
-    </script> --> 
-
     <script>
       document.addEventListener("alpine:init", () => {
         Alpine.data("posSystem", () => ({
@@ -367,7 +332,6 @@
             { id: 4, name: "Flowers" },
             { id: 5, name: "Groceries" },
             { id: 6, name: "Cosmetics" },
-
           ],
           items: [
             { id: 1, name: "Coke", price: 2, category_id: 1 },
