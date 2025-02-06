@@ -169,7 +169,7 @@
                   </div>
                 
                   <!-- Product List Section -->
-                  <div class="mb-4 overflow-y-auto" style="max-height: 400px;">
+                  <div class="mb-4 overflow-y-auto max-h-[370px] min-h-[370px] bg-gray-100 p-5 rounded-md my-5 border-1">
                     <div class="grid grid-cols-5 font-bold border-b py-2">
                       <p>Particular</p>
                       <p>Price</p>
@@ -195,23 +195,38 @@
                     </div>
                   </div>
                 
-                  <!-- Summary -->
-                  <div class="absolute bottom-10 w-full text-right p-4 bg-white">
-                    <p>Subtotal: <span x-text="total()"></span></p>
-                    <p>Discount: <input type="number" x-model.number="discount" class="border p-1 w-20 rounded-md text-right" /></p>
-                    <p class="font-bold">Grand Total: <span x-text="grandTotal()"></span></p>
+                  <div class="absolute  w-[25%] pr-5 grid grid-cols-2 text-gray-800 right-0 bottom-52 gap-2" >
+                    <p class="text-left">Subtotal:</p> 
+                    <span x-text="total()" class="text-right"></span>
+                    
+                    <p class="text-left">Discount:</p> 
+                    <span class="text-right">
+                      <input type="number" x-model.number="discount" class="border w-20 rounded-md text-right" />
+                    </span>
+           
+                    <p class="font-bold text-left">Grand Total:</p> 
+                    <span x-text="grandTotal()" class="font-bold text-right"></span>
                   </div>
-                
-                  <!-- Payment Section -->
-                  <div class="mt-4 flex justify-between items-center">
-                    <select x-model="paymentMethod" class="border p-2 rounded-md">
-                      <option value="cash">Cash</option>
-                      <option value="card">Card</option>
-                      <option value="upi">UPI</option>
-                      <option value="other">Other</option>
-                    </select>
-                    <button class="py-2 px-4 bg-green-600 text-white rounded-md font-semibold">Save</button>
+
+                  <div class="absolute bottom-20 w-[100%] px-5 flex justify-between text-gray-800 right-0" >
+                    <div>
+                    <button class="py-2 px-4 bg-green-600 text-white rounded-md font-semibold">Add Payment</button>
                   </div>
+<!-- Payment Section -->
+<div class="mt-4 flex justify-between items-center">  
+  <select x-model="paymentMethod" class="border p-2 rounded-md">
+    <option value="cash">Cash</option>
+    <option value="card">Card</option>
+    <option value="upi">UPI</option>
+    <option value="other">Other</option>
+  </select>
+  </div>
+  <div>
+  <button class="py-2 px-4 bg-blue-600 text-white rounded-md font-semibold">Save</button>
+</div>
+                    </div>
+                  
+                   
                 </div>
             </div>
           </div>
