@@ -45,30 +45,41 @@
                 <div
                   class="xl:col-span-2 flex w-full xl:snap-x snap-mandatory border-b-2 mb-2 xl:rounded-t-3xl"
                 >
-                  <div
-                    class="text-xs flex place-items-stretch w-full xl:flex-col gap-4 py-2 px-2 bg-white  shadow-xl border-r-2  pt-3 min-w-64 xl:snap-y overflow-auto scrollbar-hide xl:min-h-[calc(100vh-80px)]"
+                <div
+                class="text-xs flex place-items-stretch w-full xl:flex-col pt-5 px-2 bg-white shadow-xl border-r-2  min-w-64 xl:snap-y overflow-auto scrollbar-hide xl:min-h-[calc(100vh-80px)]"
+              >
+                <!-- "All" Button (Show Total Count) -->
+                <button
+                  class="px-2 py-5 snap-center text-left flex justify-between items-center w-full"
+                  :class="selectedCategory === null 
+                    ? 'text-white border-l-4 border-purple-800 bg-gradient-to-r to-transparent from-purple-600' 
+                    : 'border-b border-gray-300 text-purple-800'"
+                  @click="selectedCategory = null"
+                >
+                  <span class="font-semibold">All</span>
+                  <span class="text-xs font-semibold bg-gray-300 text-gray-700 px-2 py-1 rounded-md">
+                    <span x-text="items.length"></span>
+                  </span>
+                </button>
+              
+                <!-- Category Buttons with Count -->
+                <template x-for="category in categories" :key="category.id">
+                  <button
+                    class="px-2 py-5 xl:snap-start snap-center font-semibold text-left w-full flex justify-between items-center"
+                    :class="selectedCategory === category.id 
+                      ? 'text-white border-l-4 border-purple-800 bg-gradient-to-r to-transparent from-purple-600' 
+                      : 'border-b border-gray-300 text-purple-800'"
+                    @click="selectedCategory = category.id"
                   >
-                    <!-- "All" Button -->
-                    <button
-                      class="px-2 py-5  snap-center text-left"
-                      :class="selectedCategory === null ? ' text-white border-l-4 border-purple-800 bg-gradient-to-r to-transparent from-purple-600 ' : 'border-b border-gray-300 text-purple-800'"
-                      @click="selectedCategory = null"
-                    >
-                      All
-                    </button>
-
-                    <!-- Category Buttons -->
-                    <template x-for="category in categories" :key="category.id">
-                      <button
-                        class="px-2 py-5  xl:snap-start snap-center font-semibold text-left w-full"
-                        :class="selectedCategory === category.id 
-        ? 'text-white border-l-4 border-purple-800 bg-gradient-to-r to-transparent from-purple-600 ' 
-        : 'border-b border-gray-300 text-purple-800'"
-                        @click="selectedCategory = category.id"
-                        x-text="category.name"
-                      ></button>
-                    </template>
-                  </div>
+                    <span x-text="category.name"></span>
+                    <span 
+                      class="text-xs font-semibold bg-gray-300 text-gray-700 px-2 py-1 rounded-md"
+                      x-text="items.filter(item => item.category_id === category.id).length"
+                    ></span>
+                  </button>
+                </template>
+              </div>
+              
                 </div>
                 <div
                   class="xl:col-span-8 flex flex-col xl:min-h-[calc(100vh-80px)] xl:max-h-[calc(100vh-80px)] px-2"
