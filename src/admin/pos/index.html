@@ -196,7 +196,7 @@
               <div
                 class="overflow-auto scrollbar-hide max-h-[370px] min-h-[390px] bg-gray-100 p-5 rounded-md mb-5 border-1 text-xs"
               >
-                <div
+                <!-- <div
                   class="grid grid-cols-5 font-bold border-b py-2 text-md text-purple-700"
                 >
                   <p>Particular</p>
@@ -204,7 +204,8 @@
                   <p>Quantity</p>
                   <p>Total</p>
                   <p></p>
-                </div>
+                </div> -->
+                <!--                
                 <div>
                   <template x-for="(product, index) in products" :key="index">
                     <div class="grid grid-cols-5 py-2 border-b items-center">
@@ -238,6 +239,71 @@
                     </div>
                   </template>
                 </div>
+              -->
+
+                <template x-for="(product, index) in products" :key="index">
+                  <div
+                    class="grid grid-cols-6 font-bold border-b py-2 text-md text-purple-700 items-center text-md"
+                  >
+                    <!-- Left Side: Image -->
+                    <div class="col-span-1 flex items-center justify-start">
+                      <img
+                        src="/src/admin/assets/images/products/product1.jpeg"
+                        alt="Product Image"
+                        class="w-12 h-12 rounded-lg object-cover"
+                      />
+                    </div>
+
+                    <!-- Product Name -->
+                    <div
+                      class="col-span-2 flex items-start flex-col justify-between"
+                    >
+                      <p x-text="product.name" class="text-black"></p>
+                      <p>
+                        $<span x-text="product.price.toFixed(2)"></span> ×
+                        <span x-text="product.quantity"></span> =
+                        <span class="font-bold"
+                          >$<span
+                            x-text="(product.price * product.quantity).toFixed(2)"
+                          ></span
+                        ></span>
+                      </p>
+                    </div>
+
+                    <!-- Price x Quantity = Total (Single Line) -->
+                    <div
+                      class="col-span-2 flex flex-col items-center space-y-1 text-md space-x-10"
+                    >
+                      <!-- Quantity Controls -->
+                      <div class="flex items-center space-x-2 rounded-xl border-2 border-purple-800">
+                        <button
+                          @click="product.quantity--"
+                          :disabled="product.quantity <= 0  "
+                          class="px-2 py-1  disabled:opacity-50"
+                        >
+                          -
+                        </button>
+                        <span x-text="product.quantity"></span>
+                        <button
+                          @click="product.quantity++"
+                          class="px-2 py-1  rounded-md"
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
+
+                    <!-- Delete Button -->
+                    <div class="col-span-1 flex justify-center">
+                      <button
+                        @click="removeProductFromList(index)"
+                        class="text-red-500"
+                      >
+                        <i data-feather="delete" class="h-4 w-4"></i>
+                      </button>
+                    </div>
+                  </div>
+                </template>
               </div>
               <div class="flex-grow text-xs">
                 <p class="px-5 text-lg font-bold text-purple-700">
