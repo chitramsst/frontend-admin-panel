@@ -46,19 +46,24 @@
                   class="xl:col-span-2 flex w-full xl:snap-x snap-mandatory border-b-2 mb-2 xl:rounded-t-3xl"
                 >
                   <div
-                    class="text-xs place-items-stretch flex xl:flex-col gap-4 p-4 bg-white xl:fixed shadow-xl border-r-2 pt-10 min-w-64 xl:snap-y overflow-auto scrollbar-hide xl:min-h-[calc(100vh-80px)]"
+                    class="text-xs flex place-items-stretch flex-col gap-4 py-2 px-2 bg-white  shadow-xl border-r-2  pt-3 min-w-64 xl:snap-y overflow-auto scrollbar-hide xl:min-h-[calc(100vh-80px)]"
                   >
+                    <!-- "All" Button -->
                     <button
-                      class="px-4 py-2 rounded-md snap-center"
-                      :class="selectedCategory === null ? 'bg-purple-700 text-white' : 'bg-gray-300'"
+                      class="px-2 py-5  snap-center text-left"
+                      :class="selectedCategory === null ? ' text-white border-l-4 border-purple-800 bg-gradient-to-r to-transparent from-purple-600 ' : 'border-b border-gray-300 text-purple-800'"
                       @click="selectedCategory = null"
                     >
                       All
                     </button>
+
+                    <!-- Category Buttons -->
                     <template x-for="category in categories" :key="category.id">
                       <button
-                        class="px-4 py-2 rounded-md xl:snap-start snap-center text-purple-800 font-semibold"
-                        :class="selectedCategory === category.id ? 'bg-purple-700 text-white' : 'bg-gray-300'"
+                        class="px-2 py-5  xl:snap-start snap-center font-semibold text-left w-full"
+                        :class="selectedCategory === category.id 
+        ? 'text-white border-l-4 border-purple-800 bg-gradient-to-r to-transparent from-purple-600 ' 
+        : 'border-b border-gray-300 text-purple-800'"
                         @click="selectedCategory = category.id"
                         x-text="category.name"
                       ></button>
@@ -73,11 +78,11 @@
                       type="text"
                       placeholder="Search Item"
                       x-model="searchQuery"
-                      class="w-full pl-4 pr-10 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-700"
+                      class="w-full pl-4 pr-10 py-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-700"
                     />
                     <i
                       data-feather="search"
-                      class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+                      class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 h-5 w-5 mx-2"
                     ></i>
                   </div>
                   <!-- Items Section -->
@@ -92,7 +97,9 @@
                         class="flex items-center border p-4 rounded-lg shadow-lg bg-white w-full xl:snap-start max-h-[150px]"
                       >
                         <!-- Left Side: Text Content -->
-                        <div class="w-1/3 pr-4 flex flex-col xl:min-h-[100px] py-2">
+                        <div
+                          class="w-1/3 pr-4 flex flex-col xl:min-h-[100px] py-2"
+                        >
                           <!-- Content that grows and pushes price down -->
                           <div class="flex flex-col flex-grow">
                             <p
@@ -106,7 +113,9 @@
                           </div>
 
                           <!-- Price at the bottom -->
-                          <p class="text-md text-purple-700 italic font-bold mt-auto">
+                          <p
+                            class="text-md text-purple-700 italic font-bold mt-auto"
+                          >
                             $<span x-text="item.price"></span>
                           </p>
                         </div>
@@ -165,104 +174,169 @@
             </div>
 
             <!-- Bill Section -->
-            <div class="xl:col-span-3 bg-white px-2 border shadow-md flex flex-col xl:min-h-[calc(100vh-80px)]">
-  
+            <div
+              class="xl:col-span-3 bg-white px-2 border shadow-md flex flex-col xl:min-h-[calc(100vh-80px)]"
+            >
               <!-- 🔹 Search & Customer Section (Stays at Top) -->
               <div>
-                <div class="flex justify-between w-full mb-2 mt-2 items-center">
+                <div class="flex justify-between w-full mb-2 mt-5 items-center">
                   <div class="relative w-full text-xs">
                     <input
                       type="text"
                       :placeholder="customerQuery ? customerQuery : 'Search Customer'"
                       x-model="customerQuery"
                       @input="selectedCustomer = ''"
-                      class="w-full pl-4 pr-10 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-700"
+                      class="w-full pl-4 pr-10 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-700"
                     />
-                    <div x-show="filteredCustomers.length > 0 && selectedCustomer == ''" class="absolute w-full bg-white border rounded-lg shadow-lg mt-1 z-50">
-                      <template x-for="customer in filteredCustomers" :key="customer">
-                        <p class="px-4 py-2 hover:bg-gray-100 cursor-pointer" @click="selectCustomer(customer)" x-text="customer"></p>
+                    <div
+                      x-show="filteredCustomers.length > 0 && selectedCustomer == ''"
+                      class="absolute w-full bg-white border rounded-lg shadow-lg mt-1 z-50"
+                    >
+                      <template
+                        x-for="customer in filteredCustomers"
+                        :key="customer"
+                      >
+                        <p
+                          class="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                          @click="selectCustomer(customer)"
+                          x-text="customer"
+                        ></p>
                       </template>
                     </div>
                   </div>
-                  <button class="py-2 px-3 ml-2 flex justify-center items-center bg-purple-700 text-white rounded-md font-semibold">+</button>
+                  <button
+                    class="py-2 px-3 ml-2 flex justify-center items-center bg-purple-700 text-white rounded-md font-semibold"
+                  >
+                    +
+                  </button>
                 </div>
               </div>
-            
+
               <!-- 🔹 Scrollable Product List (Expands in height) -->
-              <div class="overflow-auto scrollbar-hide flex-grow bg-gray-100 p-5 rounded-md mb-5 border-1 text-xs min-h-[390px]">
+              <div
+                class="overflow-auto scrollbar-hide mt-2 flex-grow bg-gray-100 p-5 rounded-md mb-5 border-1 text-xs min-h-[390px]"
+              >
                 <template x-for="(product, index) in products" :key="index">
-                  <div class="grid grid-cols-6 font-bold border-b py-2 text-md text-purple-700 items-center">
-                    
+                  <div
+                    class="grid grid-cols-6 font-bold border-b py-2 text-md text-purple-700 items-center"
+                  >
                     <!-- Left Side: Image -->
                     <div class="col-span-1 flex items-center justify-start">
-                      <img src="/src/admin/assets/images/products/product1.jpeg" alt="Product Image" class="w-12 h-12 rounded-lg object-cover"/>
+                      <img
+                        src="/src/admin/assets/images/products/product1.jpeg"
+                        alt="Product Image"
+                        class="w-12 h-12 rounded-lg object-cover"
+                      />
                     </div>
-            
+
                     <!-- Product Name + Price Calculation -->
-                    <div class="col-span-2 flex items-start flex-col justify-between">
+                    <div
+                      class="col-span-2 flex items-start flex-col justify-between"
+                    >
                       <p x-text="product.name" class="text-black"></p>
-                      <p>$<span x-text="product.price.toFixed(2)"></span> × <span x-text="product.quantity"></span> = 
-                        <span class="font-bold">$<span x-text="(product.price * product.quantity).toFixed(2)"></span></span>
+                      <p>
+                        $<span x-text="product.price.toFixed(2)"></span> ×
+                        <span x-text="product.quantity"></span> =
+                        <span class="font-bold"
+                          >$<span
+                            x-text="(product.price * product.quantity).toFixed(2)"
+                          ></span
+                        ></span>
                       </p>
                     </div>
-            
+
                     <!-- Quantity Controls -->
-                    <div class="col-span-2 flex flex-col items-center space-y-1 text-md">
-                      <div class="flex items-center space-x-2 rounded-xl border-2 border-purple-800">
-                        <button @click="product.quantity--" :disabled="product.quantity <= 0" class="px-2 py-1 disabled:opacity-50">-</button>
+                    <div
+                      class="col-span-2 flex flex-col items-center space-y-1 text-md"
+                    >
+                      <div
+                        class="flex items-center space-x-2 rounded-xl border-2 border-purple-800"
+                      >
+                        <button
+                          @click="product.quantity--"
+                          :disabled="product.quantity <= 0"
+                          class="px-2 py-1 disabled:opacity-50"
+                        >
+                          -
+                        </button>
                         <span x-text="product.quantity"></span>
-                        <button @click="product.quantity++" class="px-2 py-1 rounded-md">+</button>
+                        <button
+                          @click="product.quantity++"
+                          class="px-2 py-1 rounded-md"
+                        >
+                          +
+                        </button>
                       </div>
                     </div>
-            
+
                     <!-- Delete Button -->
                     <div class="col-span-1 flex justify-center">
-                      <button @click="removeProductFromList(index)" class="text-red-500">
+                      <button
+                        @click="removeProductFromList(index)"
+                        class="text-red-500"
+                      >
                         <i data-feather="delete" class="h-4 w-4"></i>
                       </button>
                     </div>
-            
                   </div>
                 </template>
               </div>
-            
+
               <!-- 🔹 Order Summary (Remains at Bottom) -->
               <div class="text-xs">
-                <div class="pr-5 grid grid-cols-2 text-gray-800 right-5 gap-2 bg-gray-100 p-5 rounded-xl">
+                <div
+                  class="pr-5 grid grid-cols-2 text-gray-800 right-5 gap-2 bg-gray-100 p-5 rounded-xl"
+                >
                   <p class="text-left">Subtotal:</p>
                   <span x-text="total()" class="text-right"></span>
-            
+
                   <p class="text-left">Discount:</p>
                   <span class="text-right">
-                    <input type="number" x-model.number="discount" class="border -mx-3 py-2 rounded-md text-right w-20"/>
+                    <input
+                      type="number"
+                      x-model.number="discount"
+                      class="border -mx-3 py-2 rounded-md text-right w-20"
+                    />
                   </span>
-            
+
                   <p class="font-bold text-left">Grand Total:</p>
-                  <span x-text="grandTotal()" class="font-bold text-right"></span>
+                  <span
+                    x-text="grandTotal()"
+                    class="font-bold text-right"
+                  ></span>
                 </div>
               </div>
-            
-              
-              <div class="mt-auto text-xs mb-3">  
-                <div class="flex w-[100%] justify-around items-center text-gray-800 mt-10">
-                  <button class="py-2 px-4 bg-yellow-600 text-white rounded-md font-semibold">Add Payment</button>
-            
-              
+
+              <div class="mt-auto text-xs mb-3">
+                <div
+                  class="flex w-[100%] justify-around items-center text-gray-800 mt-10"
+                >
+                  <button
+                    class="py-2 px-4 bg-yellow-600 text-white rounded-md font-semibold"
+                  >
+                    Add Payment
+                  </button>
+
                   <div class="flex justify-between items-center">
-                    <select x-model="paymentMethod" class="border p-2 rounded-md">
+                    <select
+                      x-model="paymentMethod"
+                      class="border p-2 rounded-md"
+                    >
                       <option value="cash">Cash</option>
                       <option value="card">Card</option>
                       <option value="upi">UPI</option>
                       <option value="other">Other</option>
                     </select>
                   </div>
-            
-                  <button class="py-2 px-4 bg-purple-700 text-white rounded-md font-semibold">Save</button>
+
+                  <button
+                    class="py-2 px-4 bg-purple-700 text-white rounded-md font-semibold"
+                  >
+                    Save
+                  </button>
                 </div>
               </div>
-            
             </div>
-            
           </div>
         </div>
 
