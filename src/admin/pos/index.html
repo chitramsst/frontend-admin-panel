@@ -37,14 +37,16 @@
         <div class="grid grid-cols-1 gap-6 w-full">
           <!-- Table Card -->
           <!-- Main Grid Section -->
-          <div class="grid grid-cols-1 xl:grid-cols-12 xl:gap-2 border-gray-300">
+          <div
+            class="grid grid-cols-1 xl:grid-cols-12 xl:gap-2 border-gray-300"
+          >
             <div class="xl:col-span-9">
               <div class="xl:grid xl:grid-cols-10 gap-2">
                 <div
                   class="xl:col-span-2 flex w-full xl:snap-x snap-mandatory border-b-2 mb-2 xl:rounded-t-3xl"
                 >
                   <div
-                    class="text-xs flex xl:flex-col gap-4 p-4 bg-white xl:fixed shadow-xl border-r-2 pt-10 xl:w-48 xl:snap-y overflow-auto scrollbar-hide xl:min-h-[calc(100vh-80px)]"
+                    class="text-xs place-items-stretch flex xl:flex-col gap-4 p-4 bg-white xl:fixed shadow-xl border-r-2 pt-10 min-w-64 xl:snap-y overflow-auto scrollbar-hide xl:min-h-[calc(100vh-80px)]"
                   >
                     <button
                       class="px-4 py-2 rounded-md snap-center"
@@ -55,7 +57,7 @@
                     </button>
                     <template x-for="category in categories" :key="category.id">
                       <button
-                        class="px-4 py-2 rounded-md xl:snap-start snap-center"
+                        class="px-4 py-2 rounded-md xl:snap-start snap-center text-purple-800 font-semibold"
                         :class="selectedCategory === category.id ? 'bg-purple-700 text-white' : 'bg-gray-300'"
                         @click="selectedCategory = category.id"
                         x-text="category.name"
@@ -66,7 +68,7 @@
                 <div
                   class="xl:col-span-8 flex flex-col xl:min-h-[calc(100vh-80px)] xl:max-h-[calc(100vh-80px)] px-2"
                 >
-                  <div class="relative w-full mt-2 mb-1">
+                  <div class="relative w-full mt-2 mb-1 p-2">
                     <input
                       type="text"
                       placeholder="Search Item"
@@ -90,18 +92,25 @@
                         class="flex items-center border p-4 rounded-lg shadow-lg bg-white w-full xl:snap-start max-h-[150px]"
                       >
                         <!-- Left Side: Text Content -->
-                        <div class="flex flex-col justify-between w-1/3 pr-4">
+                        <div class="w-1/3 pr-4 flex flex-col">
+                          <!-- Content that grows and pushes price down -->
+                          <div class="flex flex-col flex-grow">
+                            <p
+                              class="font-bold text-gray-700"
+                              x-text="item.name"
+                            ></p>
+                            <p
+                              class="text-gray-600 text-sm"
+                              x-text="item.description"
+                            ></p>
+                          </div>
+
+                          <!-- Price at the bottom -->
                           <p
-                            class="font-bold text-gray-800"
-                            x-text="item.name"
-                          ></p>
-                          <p class="text-md text-purple-700 italic font-bold">
+                            class="text-md text-purple-700 italic font-bold "
+                          >
                             $<span x-text="item.price"></span>
                           </p>
-                          <p
-                            class="text-gray-600 text-sm"
-                            x-text="item.description"
-                          ></p>
                         </div>
 
                         <!-- Right Side: Image & Add Button -->
@@ -110,39 +119,39 @@
                           <div
                             class="h-24 w-full bg-gray-100 rounded-lg mb-2 relative flex items-center justify-center"
                           >
-                            <!-- Add Button -->
+                            <!-- Add Button (if product is not in cart) -->
                             <template
                               x-if="!products.find(p => p.id === item.id)"
                             >
                               <button
                                 @click="addProduct(item)"
-                                class="border-2 border-purple-700 text-purple-700 px-5 py-[0.5] flex justify-center items-center text-center absolute rounded-lg bg-white -bottom-3"
+                                class="border-2 border-purple-700 text-purple-700 px-4 py-1 absolute rounded-lg bg-white -bottom-3"
                               >
                                 Add +
                               </button>
                             </template>
+
+                            <!-- Quantity Controls (if product is in cart) -->
                             <template
                               x-if="products.find(p => p.id === item.id)"
                             >
                               <div
-                                class="border-2 bg-purple-700 text-purple-700 px-3 py-1 flex justify-center items-center text-center absolute rounded-lg -bottom-3 space-x-5"
+                                class="border-2 bg-purple-700 text-white px-3 py-1 absolute rounded-lg -bottom-3 flex items-center space-x-3"
                               >
                                 <button
                                   @click="removeProduct(item)"
-                                  class="text-white flex-1"
+                                  class="text-white px-2"
                                 >
                                   -
                                 </button>
-                                <span
-                                  class="text-sm font-bold text-center text-white flex-1"
-                                >
+                                <span class="text-sm font-bold">
                                   <span
                                     x-text="products.find(p => p.id === item.id).quantity"
                                   ></span>
                                 </span>
                                 <button
                                   @click="addProduct(item)"
-                                  class="text-white flex-1"
+                                  class="text-white px-2"
                                 >
                                   +
                                 </button>
@@ -162,8 +171,9 @@
               class="xl:col-span-3 bg-white px-2 border shadow-md flex flex-col xl:min-h-[calc(100vh-80px)]"
             >
               <!-- <h3 class="text-lg font-bold text-purple-600 mb-3">Bill</h3> -->
+               <div>
               <div class="flex justify-between w-full mb-2 mt-2 items-center">
-                <div class="relative w-full">
+                <div class="relative w-full text-xs">
                   <input
                     type="text"
                     :placeholder="customerQuery ? customerQuery : 'Search Customer'"
@@ -193,6 +203,7 @@
                   +
                 </button>
               </div>
+
               <div
                 class="overflow-auto scrollbar-hide max-h-[370px] min-h-[390px] bg-gray-100 p-5 rounded-md mb-5 border-1 text-xs"
               >
@@ -206,39 +217,6 @@
                   <p></p>
                 </div> -->
                 <!--                
-                <div>
-                  <template x-for="(product, index) in products" :key="index">
-                    <div class="grid grid-cols-5 py-2 border-b items-center">
-                      <p x-text="product.name"></p>
-                      <p x-text="product.price"></p>
-                      <div class="flex items-center justify-center">
-                        <button
-                          @click="product.quantity--"
-                          :disabled="product.quantity <= 1"
-                          class="px-2 py-1 bg-gray-300 rounded-md"
-                        >
-                          -
-                        </button>
-                        <span class="px-4" x-text="product.quantity"></span>
-                        <button
-                          @click="product.quantity++"
-                          class="px-2 py-1 bg-gray-300 rounded-md"
-                        >
-                          +
-                        </button>
-                      </div>
-                      <p
-                        x-text="(product.price * product.quantity).toFixed(2)"
-                      ></p>
-                      <button
-                        @click="removeProductFromList(index)"
-                        class="text-red-500"
-                      >
-                        <i data-feather="delete" class="h-4 w-4"></i>
-                      </button>
-                    </div>
-                  </template>
-                </div>
               -->
 
                 <template x-for="(product, index) in products" :key="index">
@@ -275,18 +253,20 @@
                       class="col-span-2 flex flex-col items-center space-y-1 text-md space-x-10"
                     >
                       <!-- Quantity Controls -->
-                      <div class="flex items-center space-x-2 rounded-xl border-2 border-purple-800">
+                      <div
+                        class="flex items-center space-x-2 rounded-xl border-2 border-purple-800"
+                      >
                         <button
                           @click="product.quantity--"
                           :disabled="product.quantity <= 0  "
-                          class="px-2 py-1  disabled:opacity-50"
+                          class="px-2 py-1 disabled:opacity-50"
                         >
                           -
                         </button>
                         <span x-text="product.quantity"></span>
                         <button
                           @click="product.quantity++"
-                          class="px-2 py-1  rounded-md"
+                          class="px-2 py-1 rounded-md"
                         >
                           +
                         </button>
@@ -306,11 +286,11 @@
                 </template>
               </div>
               <div class="flex-grow text-xs">
-                <p class="px-5 text-lg font-bold text-purple-700">
+                <!-- <p class="px-5 text-lg font-bold text-purple-700">
                   Order Summary
-                </p>
+                </p> -->
                 <div
-                  class="pr-5 grid grid-cols-2 text-gray-800 right-5 gap-2 bg-gray-100 p-5 rounded-2xl"
+                  class="pr-5 grid grid-cols-2 text-gray-800 right-5 gap-2 bg-gray-100 p-5 rounded-xl"
                 >
                   <p class="text-left">Subtotal:</p>
                   <span x-text="total()" class="text-right"></span>
@@ -330,36 +310,40 @@
                     class="font-bold text-right"
                   ></span>
                 </div>
+             
+              </div>
+              </div>
+              <div>
                 <div
-                  class="flex flex-end w-[100%] justify-around items-center text-gray-800 mb-15 mt-10"
-                >
-                  <div>
-                    <button
-                      class="py-2 px-4 bg-green-600 text-white rounded-md font-semibold"
-                    >
-                      Add Payment
-                    </button>
-                  </div>
-                  <!-- Payment Section -->
-                  <div class="flex justify-between items-center">
-                    <select
-                      x-model="paymentMethod"
-                      class="border p-2 rounded-md"
-                    >
-                      <option value="cash">Cash</option>
-                      <option value="card">Card</option>
-                      <option value="upi">UPI</option>
-                      <option value="other">Other</option>
-                    </select>
-                  </div>
-                  <div>
-                    <button
-                      class="py-2 px-4 bg-purple-700 text-white rounded-md font-semibold"
-                    >
-                      Save
-                    </button>
-                  </div>
+                class="flex flex-end w-[100%] justify-around items-center text-gray-800 mt-10"
+              >
+                <div>
+                  <button
+                    class="py-2 px-4 bg-green-600 text-white rounded-md font-semibold"
+                  >
+                    Add Payment
+                  </button>
                 </div>
+                <!-- Payment Section -->
+                <div class="flex justify-between items-center">
+                  <select
+                    x-model="paymentMethod"
+                    class="border p-2 rounded-md"
+                  >
+                    <option value="cash">Cash</option>
+                    <option value="card">Card</option>
+                    <option value="upi">UPI</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+                <div>
+                  <button
+                    class="py-2 px-4 bg-purple-700 text-white rounded-md font-semibold"
+                  >
+                    Save
+                  </button>
+                </div>
+              </div>
               </div>
             </div>
           </div>
