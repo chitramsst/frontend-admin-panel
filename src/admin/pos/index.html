@@ -50,7 +50,7 @@
                   >
                     <!-- "All" Button (Show Total Count) -->
                     <button
-                      class="px-2 py-3 snap-center text-left flex justify-between items-center w-full"
+                      class="px-2 py-3 snap-center text-left flex justify-between items-center w-full hover:border-l-4 hover:border-purple-700 hover:bg-gradient-to-r hover:to-transparent hover:from-purple-600"
                       :class="selectedCategory === null 
                     ? 'text-white border-l-4 border-purple-700 bg-gradient-to-r to-transparent from-purple-600' 
                     : 'border-b border-gray-300 text-purple-700'"
@@ -70,7 +70,7 @@
                     <!-- Category Buttons with Count -->
                     <template x-for="category in categories" :key="category.id">
                       <button
-                        class="px-2 py-3 xl:snap-start snap-center font-semibold text-left w-full flex justify-between items-center"
+                        class="px-2 py-3 xl:snap-start snap-center font-semibold text-left w-full flex justify-between items-center hover:text-white  hover:border-l-4 hover:border-purple-700 hover:bg-gradient-to-r hover:to-transparent hover:from-purple-600"
                         :class="selectedCategory === category.id 
                       ? 'text-white border-l-4 border-purple-700 bg-gradient-to-r to-transparent from-purple-600' 
                       : 'border-b border-gray-300 text-purple-700'"
