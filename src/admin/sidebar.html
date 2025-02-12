@@ -11,7 +11,8 @@
      <li class="w-full">
        <a
          href="/src/admin/pos"
-         class="active bg-purple-600 flex items-center rounded px-3 py-2 text-white hover:text-purple-700 hover:bg-purple-200 transition-all"
+         class="active  flex items-center rounded px-3 py-2  hover:text-purple-700 hover:bg-purple-200 transition-all"
+           :class="currentPath === '/src/admin/pos' ? 'bg-purple-600 text-white' : ''"
        >
          <i data-feather="home" style="width: 1.2em" class="mr-3"></i>
          <span class="flex-grow">Home</span>
@@ -21,9 +22,10 @@
        <a
          href="/src/admin/"
          class="active flex items-center rounded px-3 py-2 hover:text-purple-700  hover:bg-purple-200 transition-all"
+                        :class="currentPath === '/src/admin/' ? 'bg-purple-600 text-white' : ''"
        >
          <i data-feather="columns" style="width: 1.2em" class="mr-3"></i>
-         <span class="flex-grow">Dashboard</span>
+         <span class="flex-grow">Dashboard </span>
        </a>
      </li>
      <li class="w-full">
@@ -38,8 +40,9 @@
      </li>
      <li class="w-full">
       <a
-        href="/src/admin/sales/sales-list.html"
-        class="flex items-center rounded px-3 py-2 hover:text-purple-700 hover:bg-purple-200 transition-all"
+        href="/src/admin/sales"
+        class="active flex items-center rounded px-3 py-2 hover:text-purple-700 hover:bg-purple-200 transition-all"
+            :class="currentPath === '/src/admin/sales/' ? 'bg-purple-600 text-white' : ''"
       >
         <i data-feather="list" style="width: 1.2em" class="mr-3"></i>
 
@@ -105,7 +108,8 @@
      <li class="w-full">
        <a
          href="/src/admin/customer/"
-         class="flex items-center rounded px-3 py-2 hover:text-purple-700 hover:bg-purple-200 transition-all"
+         class="active flex items-center rounded px-3 py-2 hover:text-purple-700 hover:bg-purple-200 transition-all"
+          :class="currentPath === '/src/admin/customer/' ? 'bg-purple-600 text-white' : ''"
        >
          <i data-feather="users" style="width: 1.2em" class="mr-3"></i>
 
@@ -184,7 +188,7 @@
    >
          <i data-feather="key" style="width: 1.2em" class="mr-3"></i>
 
-         <span class="flex-grow">Settings</span>
+         <span class="flex-grow">Settings </span>
          <p
            class="w-5 h-5 transition-transform duration-300"
            :class="open ? 'rotate-180' : 'rotate-0'"

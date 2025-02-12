@@ -14,7 +14,7 @@
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <script src="/src/admin/assets/js/app.js" defer></script>
   </head>
-  <body class="bg-gray-100 h-screen w-full" x-data="{ menu: window.innerWidth >= 1280, showBack: window.location.pathname.includes('/src/admin/pos') }" @resize.window="menu = window.innerWidth >= 1280">
+  <body class="bg-gray-100 h-screen w-full" x-data="{ currentPath: window.location.pathname , menu: window.innerWidth >= 1280, showBack: window.location.pathname.includes('/src/admin/pos') }" @resize.window="menu = window.innerWidth >= 1280">
     <div class="flex h-full">
       <div id="sidebar-container"></div>
       <div class="h-full w-full" :class="menu ? 'xl:ml-64' : 'ml-0'">

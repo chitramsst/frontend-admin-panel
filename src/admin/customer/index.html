@@ -19,7 +19,7 @@
   </head>
   <body
     class="bg-gray-100 h-screen w-full"
-    x-data="{ openModal:false, menu: window.innerWidth >= 1280, showBack: window.location.pathname.includes('/src/admin/pos') }"
+    x-data="{ currentPath: window.location.pathname ,openModal:false, menu: window.innerWidth >= 1280, showBack: window.location.pathname.includes('/src/admin/pos') }"
     @resize.window="menu = window.innerWidth >= 1280"
   >
     <div class="flex h-full">
