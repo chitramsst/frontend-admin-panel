@@ -14,10 +14,10 @@
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <script src="/src/admin/assets/js/app.js" defer></script>
   </head>
-  <body class="bg-gray-100 h-screen w-full" x-data="{'menu':true, 'showBack': window.location.pathname.includes('/src/admin/pos')}">
+  <body class="bg-gray-100 h-screen w-full" x-data="{ menu: window.innerWidth >= 1280, showBack: window.location.pathname.includes('/src/admin/pos') }" @resize.window="menu = window.innerWidth >= 1280">
     <div class="flex h-full">
       <div id="sidebar-container"></div>
-      <div class="h-full w-full" :class="menu ? 'ml-64' : 'ml-0'">
+      <div class="h-full w-full" :class="menu ? 'xl:ml-64' : 'ml-0'">
         <div id="header-container"></div>
          <!-- content -->
 
@@ -29,8 +29,8 @@
                   <h3 class="text-lg font-bold mb-3 text-purple-600">Customers</h3>
                   <button class="py-2 px-3 bg-purple-600 text-white rounded-md mb-3 font-semibold">Add </button>
                 </div>
-                  <table class="w-full border-collapse border border-gray-300">
-                    <thead>
+                  <table class="w-full  border-gray-300">
+                    <thead class="w-full">
                       <tr class="bg-gray-200">
                         <th class="border p-2 w-[5%]">#</th>
                         <th class="border p-2 w-[30%]">Name</th>
@@ -45,22 +45,23 @@
                         <td class="border p-2">John Doe</td>
                         <td class="border p-2">123456</td>
                         <td class="border p-2">test@gmail.com</td>
-                        <td class="border p-2 flex space-x-2 justify-end"> 
+                        
+                        <td class="border p-4  flex items-center w-full xl:space-x-2 "> 
                             <a
                             href="#"
-                            class="flex items-center rounded px-3 py-2 hover:text-purple-700 hover:bg-gray-50 transition-all"
+                            class="hover:text-purple-700 hover:bg-gray-50 transition-all"
                           >
                             <i data-feather="eye" style="width: 1em" class="mr-3 text-yellow-800"></i>
                           </a>
                           <a
                           href="#"
-                          class="flex items-center rounded px-3 py-2 hover:text-purple-700 hover:bg-gray-50 transition-all"
+                          class=" hover:text-purple-700 hover:bg-gray-50 transition-all"
                         >
-                          <i data-feather="edit" style="width: 1em" class="mr-3 text-green-800"></i>
+                          <i data-feather="edit" style="width: 1em" class="mr-3 text-green-800 "></i>
                         </a>    `
                         <a
                         href="#"
-                        class="flex items-center rounded px-3 py-2 hover:text-purple-700 hover:bg-gray-50 transition-all"
+                        class=" hover:text-purple-700 hover:bg-gray-50 transition-all"
                       >
                         <i data-feather="trash-2" style="width: 1em" class="mr-3 text-red-800"></i>
                       </a>
@@ -68,25 +69,26 @@
                       </tr>
                       <tr class="text-center">
                         <td class="border p-2">2</td>
-                        <td class="border p-2">Jane Smith</td>
+                        <td class="border p-2">John Doe</td>
                         <td class="border p-2">123456</td>
                         <td class="border p-2">test@gmail.com</td>
-                        <td class="border p-2 flex space-x-2 justify-end"> 
+                        
+                        <td class="border p-4  flex items-center w-full xl:space-x-2 "> 
                             <a
                             href="#"
-                            class="flex items-center rounded px-3 py-2 hover:text-purple-700 hover:bg-gray-50 transition-all"
+                            class="hover:text-purple-700 hover:bg-gray-50 transition-all"
                           >
                             <i data-feather="eye" style="width: 1em" class="mr-3 text-yellow-800"></i>
                           </a>
                           <a
                           href="#"
-                          class="flex items-center rounded px-3 py-2 hover:text-purple-700 hover:bg-gray-50 transition-all"
+                          class=" hover:text-purple-700 hover:bg-gray-50 transition-all"
                         >
-                          <i data-feather="edit" style="width: 1em" class="mr-3 text-green-800"></i>
+                          <i data-feather="edit" style="width: 1em" class="mr-3 text-green-800 "></i>
                         </a>    `
                         <a
                         href="#"
-                        class="flex items-center rounded px-3 py-2 hover:text-purple-700 hover:bg-gray-50 transition-all"
+                        class=" hover:text-purple-700 hover:bg-gray-50 transition-all"
                       >
                         <i data-feather="trash-2" style="width: 1em" class="mr-3 text-red-800"></i>
                       </a>
@@ -94,25 +96,26 @@
                       </tr>
                       <tr class="text-center">
                         <td class="border p-2">3</td>
-                        <td class="border p-2">Mike Johnson</td>
+                        <td class="border p-2">John Doe</td>
                         <td class="border p-2">123456</td>
                         <td class="border p-2">test@gmail.com</td>
-                        <td class="border p-2 flex space-x-2 justify-end"> 
+                        
+                        <td class="border p-4  flex items-center w-full xl:space-x-2 "> 
                             <a
                             href="#"
-                            class="flex items-center rounded px-3 py-2 hover:text-purple-700 hover:bg-gray-50 transition-all"
+                            class="hover:text-purple-700 hover:bg-gray-50 transition-all"
                           >
                             <i data-feather="eye" style="width: 1em" class="mr-3 text-yellow-800"></i>
                           </a>
                           <a
                           href="#"
-                          class="flex items-center rounded px-3 py-2 hover:text-purple-700 hover:bg-gray-50 transition-all"
+                          class=" hover:text-purple-700 hover:bg-gray-50 transition-all"
                         >
-                          <i data-feather="edit" style="width: 1em" class="mr-3 text-green-800"></i>
+                          <i data-feather="edit" style="width: 1em" class="mr-3 text-green-800 "></i>
                         </a>    `
                         <a
                         href="#"
-                        class="flex items-center rounded px-3 py-2 hover:text-purple-700 hover:bg-gray-50 transition-all"
+                        class=" hover:text-purple-700 hover:bg-gray-50 transition-all"
                       >
                         <i data-feather="trash-2" style="width: 1em" class="mr-3 text-red-800"></i>
                       </a>
