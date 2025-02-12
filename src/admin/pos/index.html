@@ -43,10 +43,10 @@
             <div class="xl:col-span-9">
               <div class="xl:grid xl:grid-cols-10 gap-2">
                 <div
-                  class="xl:col-span-2 flex w-full xl:snap-x snap-mandatory border-b-2 mb-2 xl:rounded-t-3xl"
+                  class="xl:col-span-2 flex w-full xl:snap-x snap-mandatory border-b-2  xl:rounded-t-3xl"
                 >
                   <div
-                    class="text-xs flex place-items-stretch w-full xl:flex-col pt-5 px-2 bg-white shadow-xl border-r-2 min-w-64 xl:snap-y overflow-auto scrollbar-hide xl:min-h-[calc(100vh-80px)]"
+                    class="text-xs flex place-items-stretch w-full xl:flex-col pt-5 px-2 bg-white shadow-xl border-r-2 min-w-64 xl:snap-y overflow-auto scrollbar-hide xl:min-h-[calc(100vh-90px)]"
                   >
                     <!-- "All" Button (Show Total Count) -->
                     <button
@@ -58,7 +58,10 @@
                     >
                       <span class="font-semibold">All</span>
                       <span
-                        class="text-xs font-semibold bg-gray-300 text-gray-700 px-2 py-1 rounded-md"
+                        class="text-xs font-semibold  px-2 py-1 rounded-md"
+                        :class="selectedCategory === null 
+                        ? 'bg-purple-800 text-white' 
+                        : 'bg-gray-300 text-gray-700'"
                       >
                         <span x-text="items.length"></span>
                       </span>
@@ -75,7 +78,10 @@
                       >
                         <span x-text="category.name"></span>
                         <span
-                          class="text-xs font-semibold bg-gray-300 text-gray-700 px-2 py-1 rounded-md"
+                          class="text-xs font-semibold  px-2 py-1 rounded-md"
+                          :class="selectedCategory === category.id
+                          ? 'bg-purple-800 text-white' 
+                          : 'bg-gray-300 text-gray-700'"
                           x-text="items.filter(item => item.category_id === category.id).length"
                         ></span>
                       </button>
@@ -83,7 +89,7 @@
                   </div>
                 </div>
                 <div
-                  class="xl:col-span-8 flex flex-col xl:min-h-[calc(100vh-80px)] xl:max-h-[calc(100vh-80px)] px-2"
+                  class="xl:col-span-8 flex flex-col xl:min-h-[calc(100vh-85px)] xl:max-h-[calc(100vh-85px)] px-2"
                 >
                   <div class="relative w-full mt-2 mb-1 p-2 text-xs">
                     <input
@@ -99,7 +105,7 @@
                   </div>
                   <!-- Items Section -->
                   <div
-                    class="mb-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 overflow-auto scrollbar-hide p-2 xl:max-h-[calc(100vh-80px)] xl:snap-y text-sm place-items-start"
+                    class="mb-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 overflow-auto scrollbar-hide p-2 xl:max-h-[calc(100vh-85px)] xl:snap-y text-sm place-items-start"
                   >
                     <!-- Search Bar -->
 
@@ -187,7 +193,7 @@
 
             <!-- Bill Section -->
             <div
-              class="xl:col-span-3 bg-white px-2 border shadow-md flex flex-col xl:min-h-[calc(100vh-80px)]"
+              class="xl:col-span-3 bg-white px-2 border shadow-md flex flex-col xl:min-h-[calc(100vh-85px)]"
             >
               <!-- 🔹 Search & Customer Section (Stays at Top) -->
               <div>
@@ -324,30 +330,24 @@
               </div>
 
               <div class="mt-auto text-xs mb-3">
-                <div
-                  class="flex w-[100%] justify-around items-center text-gray-800 mt-10"
-                >
-                  <button
-                    class="py-2 px-4 bg-yellow-600 text-white rounded-md font-semibold"
-                  >
+                <div class="flex justify-between items-center text-gray-800 mt-10 space-x-2">
+                  <!-- Add Payment Button -->
+                  <button class="py-2 px-4 bg-yellow-600 text-white rounded-md font-semibold flex-1">
                     Add Payment
                   </button>
-
-                  <div class="flex justify-between items-center">
-                    <select
-                      x-model="paymentMethod"
-                      class="border p-2 rounded-md"
-                    >
+                
+                  <!-- Payment Method Dropdown -->
+                  <!-- <div class="flex-1 flex justify-center">
+                    <select x-model="paymentMethod" class="border p-2 rounded-md w-full">
                       <option value="cash">Cash</option>
                       <option value="card">Card</option>
                       <option value="upi">UPI</option>
                       <option value="other">Other</option>
                     </select>
-                  </div>
-
-                  <button
-                    class="py-2 px-4 bg-purple-700 text-white rounded-md font-semibold"
-                  >
+                  </div> -->
+                
+                  <!-- Save Button -->
+                  <button class="py-2 px-4 bg-purple-700 text-white rounded-md font-semibold flex-1">
                     Save
                   </button>
                 </div>
