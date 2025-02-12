@@ -196,18 +196,25 @@
       <div
         x-show="openModal"
         x-transition
-        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 text-xs"
+        class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-md flex items-center justify-center p-4 text-xs"
         
       >
         <!-- Modal Box -->
-        <div class="bg-white rounded-lg shadow-lg w-full max-w-md p-6" @click.outside="openModal = false ">
+        <div 
+        
+        class="bg-white  backdrop-blur-xl shadow-2xl rounded-2xl w-full max-w-lg p-8 relative transition-all transform scale-95"
+        @click.outside="openModal = false "
+        x-transition:enter="transition ease-out duration-200"
+        x-transition:enter-start="opacity-0 scale-90"
+        x-transition:enter-end="opacity-100 scale-100"
+        >
           <!-- Modal Header -->
           <div class="flex justify-between items-center border-b pb-3">
             <h2 class="text-lg font-bold text-purple-800">Add Customer</h2>
             <button @click="openModal = false">
               <i
                 data-feather="x"
-                class="w-5 h-5 text-gray-500 hover:text-gray-700"
+                class="w-6 h-6 text-purple-800 hover:text-gray-700  border-purple-800 border-[0.5px] rounded-lg p-1 hover:bg-purple-500"
               ></i>
             </button>
           </div>
@@ -217,32 +224,32 @@
             <form class="space-y-4">
               <!-- Name -->
               <div>
-                <label class="block text-gray-700 font-semibold">Name</label>
-                <input type="text" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-700" placeholder="Enter customer name">
+                <label class="block text-purple-700 pb-2 font-semibold">Name</label>
+                <input type="text" class="w-full p-2 border border-purple-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-700 h-10" placeholder="Enter customer name">
               </div>
       
               <!-- Phone -->
               <div>
-                <label class="block text-gray-700 font-semibold">Phone</label>
-                <input type="tel" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-700" placeholder="Enter phone number">
+                <label class="block text-purple-700 pb-2  font-semibold">Phone</label>
+                <input type="tel" class="w-full p-2 border border-purple-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-700 h-10" placeholder="Enter phone number">
               </div>
       
               <!-- Email -->
               <div>
-                <label class="block text-gray-700 font-semibold">Email</label>
-                <input type="email" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-700" placeholder="Enter email">
+                <label class="block text-purple-700 pb-2  font-semibold">Email</label>
+                <input type="email" class="w-full p-2 border border-purple-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-700 h-10" placeholder="Enter email">
               </div>
       
               <!-- Address -->
-              <div>
-                <label class="block text-gray-700 font-semibold">Address</label>
-                <textarea class="w-full p-2 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-1 focus:ring-purple-700" rows="2" placeholder="Enter address"></textarea>
+              <div class="">
+                <label class="block text-purple-700 pb-2  font-semibold">Address</label>
+                <textarea class="w-full p-2 border border-purple-300 rounded-lg resize-none focus:outline-none focus:ring-1 focus:ring-purple-700" rows="4" placeholder="Enter address"></textarea>
               </div>
       
               <!-- Buttons -->
-              <div class="flex justify-end space-x-2">
-                <button type="button" @click="openModal = false" class="px-4 py-2 bg-gray-300 text-gray-700 rounded-md">Cancel</button>
-                <button type="submit" class="px-4 py-2 bg-purple-700 text-white rounded-md">Confirm</button>
+              <div class="flex justify-end space-x-2 border-t pt-3">
+                <button type="button" @click="openModal = false" class="px-4 py-2 bg-gray-300 text-gray-700 rounded-md border">Cancel</button>
+                <button type="submit" class="px-4 py-2 border bg-purple-700  border-purple-700 text-white rounded-md hover:bg-purple-600 hover:text-white">Confirm</button>
               </div>
             </form>
           </div>
