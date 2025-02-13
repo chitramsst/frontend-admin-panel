@@ -272,20 +272,20 @@
                       class="col-span-2 flex flex-col items-center space-y-1 text-md"
                     >
                       <div
-                        class="flex items-center space-x-2 rounded-xl border-2 border-gray-400"
+                        class="flex items-center space-x-2 rounded-lg border-2 border-gray-400"
                       >
                         <button
                           @click="removeProduct(product)"
                           class="px-2 py-1 disabled:opacity-50 text-red-700"
                         >
-                          -
+                        <i data-feather="minus" class="h-4 w-3"></i>
                         </button>
                         <span x-text="product.quantity"></span>
                         <button
                           @click="product.quantity++"
                           class="px-2 py-1 rounded-md text-green-700"
                         >
-                          +
+                        <i data-feather="plus" class="h-4 w-3"></i>
                         </button>
                       </div>
                     </div>
