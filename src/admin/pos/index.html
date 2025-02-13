@@ -150,7 +150,7 @@
                             >
                               <button
                                 @click="addProduct(item)"
-                                class="border-2 border-purple-700 text-purple-700 px-4 py-1 absolute rounded-lg bg-white -bottom-3"
+                                class="border-2 border-gray-400 text-purple-700 px-4 py-1 absolute rounded-lg bg-white -bottom-3"
                               >
                                 Add +
                               </button>
@@ -253,7 +253,7 @@
 
                     <!-- Product Name + Price Calculation -->
                     <div
-                      class="col-span-2 flex items-start flex-col justify-between"
+                      class="col-span-3 flex items-start flex-col justify-between"
                     >
                       <p x-text="product.name" class="text-black"></p>
                       <p>
@@ -272,19 +272,18 @@
                       class="col-span-2 flex flex-col items-center space-y-1 text-md"
                     >
                       <div
-                        class="flex items-center space-x-2 rounded-xl border-2 border-purple-700"
+                        class="flex items-center space-x-2 rounded-xl border-2 border-gray-400"
                       >
                         <button
-                          @click="product.quantity--"
-                          :disabled="product.quantity <= 0"
-                          class="px-2 py-1 disabled:opacity-50"
+                          @click="removeProduct(product)"
+                          class="px-2 py-1 disabled:opacity-50 text-red-700"
                         >
                           -
                         </button>
                         <span x-text="product.quantity"></span>
                         <button
                           @click="product.quantity++"
-                          class="px-2 py-1 rounded-md"
+                          class="px-2 py-1 rounded-md text-green-700"
                         >
                           +
                         </button>
@@ -292,14 +291,14 @@
                     </div>
 
                     <!-- Delete Button -->
-                    <div class="col-span-1 flex justify-center">
+                    <!-- <div class="col-span-1 flex justify-center">
                       <button
                         @click="removeProductFromList(index)"
                         class="text-red-500"
                       >
                         <i data-feather="delete" class="h-4 w-4"></i>
                       </button>
-                    </div>
+                    </div> -->
                   </div>
                 </template>
               </div>
@@ -310,7 +309,7 @@
                   class="pr-5 grid grid-cols-2 text-gray-800 right-5 gap-2 bg-gray-100 p-5 rounded-xl"
                 >
                   <p class="text-left">Subtotal:</p>
-                  <span x-text="total()" class="text-right"></span>
+                  <span x-text="total().toFixed(2)" class="text-right"></span>
 
                   <p class="text-left">Discount:</p>
                   <span class="text-right">
@@ -321,9 +320,9 @@
                     />
                   </span>
 
-                  <p class="font-bold text-left">Grand Total:</p>
+                  <p class="font-bold text-left text-purple-700">Grand Total:</p>
                   <span
-                    x-text="grandTotal()"
+                    x-text="grandTotal().toFixed(2)"
                     class="font-bold text-right"
                   ></span>
                 </div>
